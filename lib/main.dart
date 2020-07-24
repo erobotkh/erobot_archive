@@ -8,7 +8,7 @@ import 'screens/ir_remoter/ir_remoter.dart';
 import 'screens/home_page/home.dart';
 
 void main() => runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
+      //debugShowCheckedModeBanner: false,
       home: SplashScreen(),
       //initialRoute: '/',
       routes: {
