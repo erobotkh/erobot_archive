@@ -1,5 +1,10 @@
 import 'dart:async';
+
+//Packages
 import 'package:flutter/material.dart';
+//import 'package:hexcolor/hexcolor.dart';
+
+//Screens
 import 'screens/arduino_doc/arduino_doc.dart';
 import 'screens/sender/sender.dart';
 import 'screens/ball_shooter/ball_shooter.dart';
@@ -8,19 +13,29 @@ import 'screens/ir_remoter/ir_remoter.dart';
 import 'screens/home_page/home.dart';
 import 'screens/drawer_bar/aboutus.dart';
 import 'screens/drawer_bar/feedback.dart';
+
 //import 'package:page_transition/page_transition.dart';
 
+Map<int, Color> color = {
+  50: Color.fromRGBO(136, 14, 79, .1),
+  100: Color.fromRGBO(136, 14, 79, .2),
+  200: Color.fromRGBO(136, 14, 79, .3),
+  300: Color.fromRGBO(136, 14, 79, .4),
+  400: Color.fromRGBO(136, 14, 79, .5),
+  500: Color.fromRGBO(136, 14, 79, .6),
+  600: Color.fromRGBO(136, 14, 79, .7),
+  700: Color.fromRGBO(136, 14, 79, .8),
+  800: Color.fromRGBO(136, 14, 79, .9),
+  900: Color.fromRGBO(136, 14, 79, 1),
+};
+
+//0xAARRGGBB
+MaterialColor colorCustom = MaterialColor(0xFF172634, color);
+
 void main() => runApp(MaterialApp(
-      // onGenerateRoute: (settings){
-      //   if(settings.name == '/homescreen'){
-      //       return PageTransition(
-      //         child: HomeScreen(),
-      //         type: PageTransitionType.scale,
-      //         settings: settings,
-      //       );
-      //     }
-      //     else return null;
-      // },
+      theme: ThemeData(
+        primarySwatch: colorCustom,
+      ),
       //debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
@@ -52,12 +67,12 @@ class _SplashScreenState extends State<SplashScreen> {
     _loadWidget();
   }
 
-  _loadWidget(){
+  _loadWidget() {
     var _duration = Duration(seconds: delay);
     return Timer(_duration, navigationPage);
   }
 
-  void navigationPage(){
+  void navigationPage() {
     Navigator.pushReplacementNamed(context, '/homescreen');
   }
 
@@ -65,9 +80,11 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Image.asset('assets/app_splash.png', width: 150,),
+        child: Image.asset(
+          'assets/app_splash.png',
+          width: 150,
+        ),
       ),
     );
   }
 }
-

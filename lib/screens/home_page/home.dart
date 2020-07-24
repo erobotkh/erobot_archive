@@ -43,13 +43,13 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisSpacing: 3,
           mainAxisSpacing: 3,
           children: <Widget>[
-            _buildBtn('Arduino Documents', 'Learn to build a robot', 0,
+            _buildBtn('Arduino Documents', 'Learn how to build a robot', 0,
                 context),
-            _buildBtn('Sender', 'to Send text to your arduino via Bluetooth', 1,
+            _buildBtn('Sender', 'to Send text to arduino via Bluetooth', 1,
                 context),
             _buildBtn(
                 'Ball Shooter',
-                'to Control your ball shooter arduino car, servo, and speed',
+                'to Control ball shooter arduino car, servo, and speed',
                 2,
                 context),
             _buildBtn('Arduino Car',
@@ -81,7 +81,6 @@ Widget _buildBtn(
     pathlogo = 'arduino_logo.png';
   }
   return Container(
-    height: 150,
     child: Padding(
         padding: cardIndex == 0 ? EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 10.0) : cardIndex.isEven
             ? EdgeInsets.fromLTRB(5.0, 0.0, 18.0, 10.0)
