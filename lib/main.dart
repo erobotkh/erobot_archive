@@ -8,7 +8,7 @@ import 'screens/ir_remoter/ir_remoter.dart';
 import 'screens/home_page/home.dart';
 import 'screens/drawer_bar/aboutus.dart';
 import 'screens/drawer_bar/feedback.dart';
-import 'package:page_transition/page_transition.dart';
+//import 'package:page_transition/page_transition.dart';
 
 void main() => runApp(MaterialApp(
       // onGenerateRoute: (settings){
