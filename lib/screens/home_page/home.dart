@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisSpacing: 3,
           mainAxisSpacing: 3,
           children: <Widget>[
-            _buildBtn('Sender', 'to Send text to your arduino via Bluetooth', 0,
+            _buildBtn('Arduino Documents', 'Learn to build a robot', 0,
                 context),
             _buildBtn('Sender', 'to Send text to your arduino via Bluetooth', 1,
                 context),
@@ -70,6 +70,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
 Widget _buildBtn(
     String title, String desription, int cardIndex, BuildContext context) {
+  String pathlogo = 'mdi_bluetooth.png';
+  double widtht = 15;
+  double heightt = 20;
+  double boxSizz = 10;
+  if(cardIndex == 0){
+    boxSizz = 0;
+    widtht = 30;
+    heightt = 35;
+    pathlogo = 'arduino_logo.png';
+  }
   return Container(
     height: 150,
     child: Padding(
@@ -90,36 +100,53 @@ Widget _buildBtn(
             child: FlatButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(14.0))),
-              onPressed: () {},
+              onPressed: () {
+                String routeP;
+                if(cardIndex == 0) routeP = '/ard_doc';
+                if(cardIndex == 1) routeP = '/sender';
+                if(cardIndex == 2) routeP = '/shooter';
+                if(cardIndex == 3) routeP = '/ard_car';
+                if(cardIndex == 4) routeP = '/ir_remote';
+                Navigator.pushNamed(context, routeP);
+              },
               splashColor: Color.fromRGBO(255, 255, 255, .2),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  SizedBox(
-                    height: 15,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        title,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Raleway',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: .7),
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        desription,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Raleway',
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300,
+                            letterSpacing: .5),
+                      ),
+                    ],
                   ),
-                  Text(
-                    title,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Raleway',
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: .7),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    desription,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Raleway',
-                        fontSize: 12,
-                        fontWeight: FontWeight.w300,
-                        letterSpacing: .5),
-                  )
+                  SizedBox(height: 10,),
+                  Image.asset('assets/$pathlogo', width: widtht, height: heightt),
+                  SizedBox(height: boxSizz,)
                 ],
               ),
             ),

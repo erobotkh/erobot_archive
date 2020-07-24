@@ -26,6 +26,8 @@ dependencies:
   hexcolor: ^1.0.4
   font_awesome_flutter: ^8.8.1
   flutter_staggered_grid_view: ^0.3.1
+  page_transition: ^1.1.6
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

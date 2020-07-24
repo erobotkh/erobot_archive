@@ -104,6 +104,12 @@
       "languageVersion": "1.12"
     },
     {
+      "name": "page_transition",
+      "rootUri": "file:///home/thea/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/page_transition-1.1.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
+    },
+    {
       "name": "path",
       "rootUri": "file:///home/thea/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.6.4",
       "packageUri": "lib/",
@@ -188,7 +194,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-07-24T12:32:03.738861Z",
+  "generated": "2020-07-24T14:09:54.401965Z",
   "generator": "pub",
   "generatorVersion": "2.8.4"
 }
