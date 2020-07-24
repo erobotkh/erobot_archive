@@ -11,16 +11,16 @@ import 'screens/drawer_bar/feedback.dart';
 import 'package:page_transition/page_transition.dart';
 
 void main() => runApp(MaterialApp(
-      onGenerateRoute: (settings){
-        if(settings.name == '/homescreen'){
-            return PageTransition(
-              child: HomeScreen(),
-              type: PageTransitionType.scale,
-              settings: settings,
-            );
-          }
-          else return null;
-      },
+      // onGenerateRoute: (settings){
+      //   if(settings.name == '/homescreen'){
+      //       return PageTransition(
+      //         child: HomeScreen(),
+      //         type: PageTransitionType.scale,
+      //         settings: settings,
+      //       );
+      //     }
+      //     else return null;
+      // },
       //debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
