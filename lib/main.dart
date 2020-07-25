@@ -74,8 +74,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    Navigator.push(context, PageTransition(child: HomeScreen(), duration: Duration(milliseconds: 450), type: PageTransitionType.fade));
-    //Navigator.pushReplacementNamed(context, '/homescreen');
+    Navigator.push(
+        context,
+        PageTransition(
+            child: HomeScreen(),
+            duration: Duration(milliseconds: 450),
+            type: PageTransitionType.fade));
   }
 
   @override
@@ -89,55 +93,56 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(height: 250,),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                    SizedBox(
+                      height: 250,
+                    ),
                     Image.asset(
                       'assets/app_splash.png',
                       width: 150,
                     ),
-                    SizedBox(height: 8,),
+                    SizedBox(
+                      height: 8,
+                    ),
                     Shimmer.fromColors(
                       baseColor: Colors.red,
                       highlightColor: Color.fromRGBO(22, 31, 40, 1),
                       child: RichText(
                         text: TextSpan(
-                          style: TextStyle(
-                            fontFamily: 'Raleway',
-                            color: Color.fromRGBO(22, 31, 40, 1),
-                            fontWeight: FontWeight.w300,
-                            fontSize: 15,
-                          ),
-                          children: <TextSpan>[
-                            TextSpan(text: 'EDUCATION IS '),
-                            TextSpan(
-                              text: 'POWER', 
-                              style: TextStyle(
-                                color: Colors.red,
-                              )
+                            style: TextStyle(
+                              fontFamily: 'Raleway',
+                              color: Color.fromRGBO(22, 31, 40, 1),
+                              fontWeight: FontWeight.w300,
+                              fontSize: 15,
                             ),
-                            TextSpan(text: '.')
-                          ]
-                        ),
+                            children: <TextSpan>[
+                              TextSpan(text: 'EDUCATION IS '),
+                              TextSpan(
+                                  text: 'POWER',
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                  )),
+                              TextSpan(text: '.')
+                            ]),
                       ),
                     )
-                  ]
-                )
-              ),
+                  ])),
               Container(
-                child: Column(
-                  children: <Widget>[
-                    Text('Last published 30th Jul, 2020.',
-                      style: TextStyle(
+                child: Column(children: <Widget>[
+                  Text(
+                    'Last published 30th Jul, 2020.',
+                    style: TextStyle(
                       fontFamily: 'Quicksand',
                       color: Color.fromRGBO(22, 31, 40, .6),
                       fontSize: 14,
-                      ),
                     ),
-                    SizedBox(height: 20,),
-                  ]
-                ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ]),
               )
             ],
           ),

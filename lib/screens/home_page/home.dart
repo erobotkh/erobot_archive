@@ -1,16 +1,21 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'main_drawer.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+import 'main_drawer.dart';
+
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key key}) : super(key: key);
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
+
+var listNum = [0, 1, 2, 3, 4];
+int randomNum = listNum[Random().nextInt(listNum.length)];
+bool favoriteC = true;
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
@@ -36,6 +41,25 @@ class _HomeScreenState extends State<HomeScreen> {
               fontWeight: FontWeight.w500,
             ),
           ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                _heartIcon(),
+                color: Colors.white,
+              ),
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onPressed: () {
+                randomNum = listNum[Random().nextInt(listNum.length)];
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        child: HomeScreen(),
+                        duration: Duration(milliseconds: 1000),
+                        type: PageTransitionType.fade));
+              },
+            )
+          ],
         ),
         drawer: MainDrawer(),
         body: StaggeredGridView.count(
@@ -43,10 +67,10 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisSpacing: 3,
           mainAxisSpacing: 3,
           children: <Widget>[
-            _buildBtn('Arduino Documents', 'Learn how to build a robot', 0,
-                context),
-            _buildBtn('Sender', 'to Send text to arduino via Bluetooth', 1,
-                context),
+            _buildBtn(
+                'Arduino Documents', 'Learn how to build a robot', 0, context),
+            _buildBtn(
+                'Sender', 'to Send text to arduino via Bluetooth', 1, context),
             _buildBtn(
                 'Ball Shooter',
                 'to Control ball shooter arduino car, servo, and speed',
@@ -68,17 +92,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-var listNum = [0, 1, 2, 3, 4];
-int randomNum = listNum[Random().nextInt(listNum.length)];
-
 Widget _buildBtn(
-  
     String title, String desription, int cardIndex, BuildContext context) {
   String pathlogo = 'mdi_bluetooth.png';
   double widtht = 15;
   double heightt = 20;
   double boxSizz = 10;
-  if(cardIndex == 0){
+  if (cardIndex == 0) {
     boxSizz = 0;
     widtht = 30;
     heightt = 35;
@@ -86,9 +106,11 @@ Widget _buildBtn(
   }
   return Container(
     child: Padding(
-        padding: cardIndex == 0 ? EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 10.0) : cardIndex.isEven
-            ? EdgeInsets.fromLTRB(5.0, 0.0, 18.0, 10.0)
-            : EdgeInsets.fromLTRB(18.0, 0.0, 5.0, 10.0),
+        padding: cardIndex == 0
+            ? EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 10.0)
+            : cardIndex.isEven
+                ? EdgeInsets.fromLTRB(5.0, 0.0, 18.0, 10.0)
+                : EdgeInsets.fromLTRB(18.0, 0.0, 5.0, 10.0),
         child: Stack(children: <Widget>[
           Positioned.fill(
             child: ClipRRect(
@@ -105,11 +127,11 @@ Widget _buildBtn(
                   borderRadius: BorderRadius.all(Radius.circular(14.0))),
               onPressed: () {
                 String routeP;
-                if(cardIndex == 0) routeP = '/ard_doc';
-                if(cardIndex == 1) routeP = '/sender';
-                if(cardIndex == 2) routeP = '/shooter';
-                if(cardIndex == 3) routeP = '/ard_car';
-                if(cardIndex == 4) routeP = '/ir_remote';
+                if (cardIndex == 0) routeP = '/ard_doc';
+                if (cardIndex == 1) routeP = '/sender';
+                if (cardIndex == 2) routeP = '/shooter';
+                if (cardIndex == 3) routeP = '/ard_car';
+                if (cardIndex == 4) routeP = '/ir_remote';
                 Navigator.pushNamed(context, routeP);
               },
               splashColor: Color.fromRGBO(255, 255, 255, .2),
@@ -147,9 +169,14 @@ Widget _buildBtn(
                       ),
                     ],
                   ),
-                  SizedBox(height: 10,),
-                  Image.asset('assets/$pathlogo', width: widtht, height: heightt),
-                  SizedBox(height: boxSizz,)
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Image.asset('assets/$pathlogo',
+                      width: widtht, height: heightt),
+                  SizedBox(
+                    height: boxSizz,
+                  )
                 ],
               ),
             ),
@@ -158,6 +185,16 @@ Widget _buildBtn(
   );
 }
 
+IconData _heartIcon(){
+  if(favoriteC){
+    favoriteC = false;
+    return Icons.favorite;
+  }
+  else{
+    favoriteC = true;
+    return Icons.favorite_border;
+  } 
+}
 // ignore: non_constant_identifier_names
 Widget RandBackground() {
   randomNum++;
