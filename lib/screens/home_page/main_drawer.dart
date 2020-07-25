@@ -15,14 +15,13 @@ class _MainDrawerState extends State<MainDrawer> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Container(
-        color: Hexcolor('172634'),
         child: ListView(
           children: <Widget>[
             Container(
               child: Column(
                 children: <Widget>[
                   Container(
-                    color: Hexcolor('161f28'),
+                    color: Hexcolor('172634'),
                     width: double.infinity,
                     padding: EdgeInsets.all(20),
                     child: Column(
@@ -71,7 +70,7 @@ class _MainDrawerState extends State<MainDrawer> {
                           fontFamily: 'Raleway',
                           color: Colors.white,
                           fontSize: 15,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w500),
                     ),
                     onTap: () {
                       Navigator.pushNamed(context, '/feedback');
@@ -90,7 +89,7 @@ class _MainDrawerState extends State<MainDrawer> {
                             fontFamily: 'Raleway',
                             color: Colors.white,
                             fontSize: 15,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w500),
                       ),
                       onTap: () {
                         Navigator.pushNamed(context, '/aboutus');
@@ -108,7 +107,7 @@ class _MainDrawerState extends State<MainDrawer> {
                           fontFamily: 'Raleway',
                           color: Colors.white,
                           fontSize: 15,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w500),
                     ),
                     onTap: () {
                       Navigator.pushNamed(context, '/feedback');
@@ -125,7 +124,7 @@ class _MainDrawerState extends State<MainDrawer> {
                           fontFamily: 'Raleway',
                           color: Colors.white,
                           fontSize: 15,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w500),
                     ),
                     onTap: () {
                       exit(0);

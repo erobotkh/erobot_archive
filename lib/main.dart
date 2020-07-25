@@ -31,10 +31,12 @@ Map<int, Color> color = {
 
 //0xAARRGGBB
 MaterialColor colorCustom = MaterialColor(0xFF172634, color);
+MaterialColor colorCustom2 = MaterialColor(0xFF161F28, color);
 
 void main() => runApp(MaterialApp(
       theme: ThemeData(
         primarySwatch: colorCustom,
+        canvasColor: colorCustom2,
       ),
       //debugShowCheckedModeBanner: false,
       initialRoute: '/',
