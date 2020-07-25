@@ -128,7 +128,7 @@ class _SplashScreenState extends State<SplashScreen> {
               Container(
                 child: Column(
                   children: <Widget>[
-                    Text('Last published 21st Aug, 2020.',
+                    Text('Last published 30th Jul, 2020.',
                       style: TextStyle(
                       fontFamily: 'Quicksand',
                       color: Color.fromRGBO(22, 31, 40, .6),
