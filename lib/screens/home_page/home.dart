@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'main_drawer.dart';
@@ -21,9 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Hexcolor('#161f28'),
         appBar: AppBar(
-          backgroundColor: Hexcolor('#172634'),
           leading: Padding(
             padding: const EdgeInsets.only(left: 13),
             child: Builder(
@@ -39,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
             style: TextStyle(
               fontFamily: 'Raleway',
               fontWeight: FontWeight.w500,
+              fontSize: 18
             ),
           ),
           actions: <Widget>[
