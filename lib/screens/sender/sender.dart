@@ -13,6 +13,7 @@ class _SenderState extends State<Sender> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Sender'),
+        
       ),
     );
   }

@@ -38,6 +38,12 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "control_pad",
+      "rootUri": "file:///home/thea/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/control_pad-1.1.1+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
       "name": "convert",
       "rootUri": "file:///home/thea/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/convert-2.1.1",
       "packageUri": "lib/",
@@ -200,7 +206,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-07-25T08:18:05.372453Z",
+  "generated": "2020-07-25T14:18:28.524467Z",
   "generator": "pub",
   "generatorVersion": "2.8.4"
 }

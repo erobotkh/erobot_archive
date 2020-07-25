@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter/services.dart';
 import 'main_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,6 +15,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return Scaffold(
         appBar: AppBar(
           leading: Padding(
@@ -29,10 +36,9 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text(
             'E-Robot',
             style: TextStyle(
-              fontFamily: 'Raleway',
-              fontWeight: FontWeight.w500,
-              fontSize: 18
-            ),
+                fontFamily: 'Raleway',
+                fontWeight: FontWeight.w500,
+                fontSize: 18),
           ),
           actions: <Widget>[
             IconButton(
@@ -177,19 +183,20 @@ Widget _buildBtn(
         ])),
   );
 }
+
 var listNum = [0, 1, 2, 3, 4];
 int randomNum = listNum[Random().nextInt(listNum.length)];
 bool favoriteC = true;
-IconData _heartIcon(){
-  if(favoriteC){
+IconData _heartIcon() {
+  if (favoriteC) {
     favoriteC = false;
     return Icons.favorite;
-  }
-  else{
+  } else {
     favoriteC = true;
     return Icons.favorite_border;
-  } 
+  }
 }
+
 // ignore: non_constant_identifier_names
 Widget RandBackground() {
   randomNum++;
