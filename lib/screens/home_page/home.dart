@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
 import 'main_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,10 +10,6 @@ class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
-
-var listNum = [0, 1, 2, 3, 4];
-int randomNum = listNum[Random().nextInt(listNum.length)];
-bool favoriteC = true;
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
@@ -182,7 +177,9 @@ Widget _buildBtn(
         ])),
   );
 }
-
+var listNum = [0, 1, 2, 3, 4];
+int randomNum = listNum[Random().nextInt(listNum.length)];
+bool favoriteC = true;
 IconData _heartIcon(){
   if(favoriteC){
     favoriteC = false;
