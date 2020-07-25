@@ -2,6 +2,8 @@ import 'dart:async';
 
 //Packages
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:page_transition/page_transition.dart';
 //import 'package:hexcolor/hexcolor.dart';
 
 //Screens
@@ -13,8 +15,8 @@ import 'screens/ir_remoter/ir_remoter.dart';
 import 'screens/home_page/home.dart';
 import 'screens/drawer_bar/aboutus.dart';
 import 'screens/drawer_bar/feedback.dart';
-
-//import 'package:page_transition/page_transition.dart';
+import 'screens/login_page/log_choice.dart';
+import 'screens/login_page/login.dart';
 
 Map<int, Color> color = {
   50: Color.fromRGBO(136, 14, 79, .1),
@@ -42,6 +44,8 @@ void main() => runApp(MaterialApp(
       initialRoute: '/',
       routes: {
         '/': (context) => SplashScreen(),
+        '/loginC': (context) => LogInChoice(),
+        '/loginP': (context) => LoginPage(),
         '/homescreen': (context) => HomeScreen(),
         '/ard_doc': (context) => ArduinoDoc(),
         '/sender': (context) => Sender(),
@@ -61,30 +65,82 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final delay = 5;
-
+  final delay = 3;
   @override
   void initState() {
     super.initState();
-    _loadWidget();
-  }
-
-  _loadWidget() {
     var _duration = Duration(seconds: delay);
-    return Timer(_duration, navigationPage);
+    Timer(_duration, navigationPage);
   }
 
   void navigationPage() {
-    Navigator.pushReplacementNamed(context, '/homescreen');
+    Navigator.push(context, PageTransition(child: HomeScreen(), duration: Duration(milliseconds: 450), type: PageTransitionType.fade));
+    //Navigator.pushReplacementNamed(context, '/homescreen');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Image.asset(
-          'assets/app_splash.png',
-          width: 150,
+      body: SafeArea(
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: 250,),
+                    Image.asset(
+                      'assets/app_splash.png',
+                      width: 150,
+                    ),
+                    SizedBox(height: 8,),
+                    Shimmer.fromColors(
+                      baseColor: Colors.red,
+                      highlightColor: Color.fromRGBO(22, 31, 40, 1),
+                      child: RichText(
+                        text: TextSpan(
+                          style: TextStyle(
+                            fontFamily: 'Raleway',
+                            color: Color.fromRGBO(22, 31, 40, 1),
+                            fontWeight: FontWeight.w300,
+                            fontSize: 15,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(text: 'EDUCATION IS '),
+                            TextSpan(
+                              text: 'POWER', 
+                              style: TextStyle(
+                                color: Colors.red,
+                              )
+                            ),
+                            TextSpan(text: '.')
+                          ]
+                        ),
+                      ),
+                    )
+                  ]
+                )
+              ),
+              Container(
+                child: Column(
+                  children: <Widget>[
+                    Text('Last published 21st Aug, 2020.',
+                      style: TextStyle(
+                      fontFamily: 'Quicksand',
+                      color: Color.fromRGBO(22, 31, 40, .6),
+                      fontSize: 14,
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                  ]
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

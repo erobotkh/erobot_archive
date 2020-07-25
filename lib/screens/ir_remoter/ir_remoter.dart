@@ -11,7 +11,9 @@ class _IrRemoterState extends State<IrRemoter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      appBar: AppBar(
+        title: Text('IR Remoter')
+      ),
     );
   }
 }

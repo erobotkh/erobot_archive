@@ -68,7 +68,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
+var listNum = [0, 1, 2, 3, 4];
+int randomNum = listNum[Random().nextInt(listNum.length)];
+
 Widget _buildBtn(
+  
     String title, String desription, int cardIndex, BuildContext context) {
   String pathlogo = 'mdi_bluetooth.png';
   double widtht = 15;
@@ -153,9 +157,6 @@ Widget _buildBtn(
         ])),
   );
 }
-
-var listNum = [0, 1, 2, 3, 4];
-int randomNum = listNum[Random().nextInt(listNum.length)];
 
 // ignore: non_constant_identifier_names
 Widget RandBackground() {

@@ -11,7 +11,9 @@ class _ArduinoDocState extends State<ArduinoDoc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      appBar: AppBar(
+        title: Text('Arduino Documents')
+      ),
     );
   }
 }

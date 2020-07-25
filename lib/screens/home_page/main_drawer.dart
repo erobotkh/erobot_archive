@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -61,11 +59,11 @@ class _MainDrawerState extends State<MainDrawer> {
                   ),
                   ListTile(
                     leading: Icon(
-                      Icons.home,
+                      Icons.person,
                       color: Colors.white,
                     ),
                     title: Text(
-                      'Home',
+                      'Log in',
                       style: TextStyle(
                           fontFamily: 'Raleway',
                           color: Colors.white,
@@ -73,7 +71,7 @@ class _MainDrawerState extends State<MainDrawer> {
                           fontWeight: FontWeight.w500),
                     ),
                     onTap: () {
-                      Navigator.pushNamed(context, '/feedback');
+                      Navigator.pushNamed(context, '/loginC');
                     },
                   ),
                   InkWell(
@@ -127,7 +125,8 @@ class _MainDrawerState extends State<MainDrawer> {
                           fontWeight: FontWeight.w500),
                     ),
                     onTap: () {
-                      exit(0);
+                      Navigator.pushNamed(context, '/');
+                      //exit(0);
                     },
                   ),
                 ],

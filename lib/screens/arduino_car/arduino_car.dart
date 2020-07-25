@@ -11,7 +11,9 @@ class _ArduinoCarState extends State<ArduinoCar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      appBar: AppBar(
+        title: Text('Arduino Car')
+      ),
     );
   }
 }
