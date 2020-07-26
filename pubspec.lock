@@ -43,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.14.12"
-  control_pad:
-    dependency: "direct main"
-    description:
-      name: control_pad
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.1+1"
   convert:
     dependency: transitive
     description:
@@ -163,6 +156,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sleek_circular_slider:
+    dependency: "direct main"
+    description:
+      name: sleek_circular_slider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   source_span:
     dependency: transitive
     description:

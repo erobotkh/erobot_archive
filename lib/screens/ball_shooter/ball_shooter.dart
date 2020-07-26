@@ -1,13 +1,15 @@
-//import 'package:erobot_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+//import 'package:page_transition/page_transition.dart';
+//import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 //import 'package:page_transition/page_transition.dart';
 //import 'package:control_pad/control_pad.dart';
+
+//import 'package:erobot_app/main.dart';
 class BallShooter extends StatefulWidget {
   BallShooter({Key key}) : super(key: key);
 
@@ -36,7 +38,9 @@ class _BallShooterState extends State<BallShooter> {
 
   double widthBtn = 55;
   double heightBtn = 55;
-
+  double speed = 5;
+  double speedTMP = 5;
+  double servo = 5;
   var bltBtn1; //this will send to arduino
   var bltBtn2;
   var bltBtn3;
@@ -44,7 +48,8 @@ class _BallShooterState extends State<BallShooter> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -65,42 +70,159 @@ class _BallShooterState extends State<BallShooter> {
                 icon: Icon(isConnect()),
                 onPressed: () {
                   if (!isConnected)
-                    isConnected = true;
+                    isConnected = false;
                   else
                     isConnected = false;
-                  Navigator.pushReplacement(
-                      context,
-                      PageTransition(
-                          child: BallShooter(),
-                          duration: Duration(milliseconds: 1000),
-                          type: PageTransitionType.fade));
+                  // setState(() {
+
+                  // });
                 })
           ],
           elevation: 0.0,
         ),
-        body: Container(
-          width: 250,
-          color: Colors.red,
-          height: 240,
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                createPadBtn(1),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                Container(
+                  child: Center(
+                    child: Column(
+                      children: <Widget>[
+                        createPadBtn(1),
+                        Row(children: <Widget>[
+                          createPadBtn(2),
+                          SizedBox(
+                            width: widthBtn,
+                          ),
+                          createPadBtn(3),
+                        ]),
+                        createPadBtn(4),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 250,
+                  height: 180,
+                  child: Stack(
                     children: <Widget>[
-                      createPadBtn(2),
-                      SizedBox(
-                        width: widthBtn,
+                      Positioned.directional(
+                        textDirection: TextDirection.ltr,
+                        start: 40,
+                        child: Text(
+                          'Speed: $speed',
+                          style: TextStyle(
+                              color: Colors.white, fontFamily: 'Quicksand'),
+                        ),
                       ),
-                      createPadBtn(3),
-                    ]),
-                createPadBtn(4),
+                      Positioned.fill(
+                        child: SleekCircularSlider(
+                          initialValue: speedTMP,
+                          min: 0,
+                          max: 9,
+                          appearance: CircularSliderAppearance(
+                            customWidths: CustomSliderWidths(
+                              progressBarWidth: 10,
+                              handlerSize: 3,
+                            ),
+                            customColors: CustomSliderColors(
+                                trackColor: Hexcolor('c4c4c4'),
+                                progressBarColor: Hexcolor('B6142C'),
+                                hideShadow: true,
+                                dotColor: Hexcolor('c4c4c4')),
+                            startAngle: 90,
+                            angleRange: 180,
+                            counterClockwise: true,
+                          ),
+                          onChange: (speedTMP) {
+                            setState(() {
+                              speed = speedTMP.roundToDouble();
+                            });
+                            print(speed);
+                          },
+                        ),
+                      ),
+                      Center(
+                        child: ClipOval(
+                          child: Material(
+                            color: Hexcolor('B6142C'),
+                            child: InkWell(
+                              splashColor: Colors.black12,
+                              child: SizedBox(
+                                  width: widthBtn * 2.2,
+                                  height: heightBtn * 2.2,
+                                  child: Icon(
+                                    Icons.gps_fixed,
+                                    size: widthBtn,
+                                    color: Colors.white,
+                                  )),
+                              onTap: () {},
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
-          ),
+            Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Servo:',
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: 'Quicksand'),
+                    ),
+                    Container(
+                      width: 200,
+                      height: 20,
+                      child: SliderTheme(
+                        data: SliderTheme.of(context).copyWith(
+                          trackShape: RectangularSliderTrackShape(),
+                          trackHeight: 2,
+                          thumbColor: Colors.white,
+                          thumbShape:
+                              RoundSliderThumbShape(enabledThumbRadius: 8.0),
+                          overlayShape:
+                              RoundSliderOverlayShape(overlayRadius: 40.0),
+                        ),
+                        child: Slider(
+                          value: servo,
+                          max: 9,
+                          min: 0,
+                          activeColor: Hexcolor('B6142C'),
+                          inactiveColor: Hexcolor('c4c4c4'),
+                          onChanged: (servoTMP) {
+                            setState(() {
+                              servo = servoTMP.roundToDouble();
+                            });
+                            print(servo);
+                          },
+                        ),
+                      ),
+                    ),
+                    Text(
+                      '$servo',
+                      style: TextStyle(
+                          color: Colors.white, fontFamily: 'Quicksand'),
+                    ),
+                  ],
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );
@@ -145,7 +267,7 @@ IconData isConnect() {
     isConnected = false;
     return Icons.bluetooth_connected;
   } else {
-    isConnected = true;
+    isConnected = false;
     return Icons.bluetooth_disabled;
   }
 }
