@@ -9,8 +9,8 @@ import 'package:flutter/services.dart';
 //Screens
 import 'screens/arduino_doc/arduino_doc.dart';
 import 'screens/sender/sender.dart';
-import 'screens/ball_shooter/ball_shooter.dart';
-import 'screens/arduino_car/arduino_car.dart';
+import 'screens/controller/ball_shooter.dart';
+import 'screens/controller/arduino_car.dart';
 import 'screens/ir_remoter/ir_remoter.dart';
 import 'screens/home_page/home.dart';
 import 'screens/drawer_bar/aboutus.dart';

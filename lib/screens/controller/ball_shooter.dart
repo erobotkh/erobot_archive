@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import 'controller_supplier.dart';
 //import 'package:page_transition/page_transition.dart';
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -35,16 +36,6 @@ class _BallShooterState extends State<BallShooter> {
         [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
     super.initState();
   }
-
-  double widthBtn = 55;
-  double heightBtn = 55;
-  double speed = 5;
-  double speedTMP = 5;
-  double servo = 5;
-  var bltBtn1; //this will send to arduino
-  var bltBtn2;
-  var bltBtn3;
-  var bltBtn4;
 
   @override
   Widget build(BuildContext context) {
@@ -93,15 +84,15 @@ class _BallShooterState extends State<BallShooter> {
                   child: Center(
                     child: Column(
                       children: <Widget>[
-                        createPadBtn(1),
+                        createPadBtn(1, widthBtn, heightBtn, 1),
                         Row(children: <Widget>[
-                          createPadBtn(2),
+                          createPadBtn(2, widthBtn, heightBtn, 1),
                           SizedBox(
                             width: widthBtn,
                           ),
-                          createPadBtn(3),
+                          createPadBtn(3, widthBtn, heightBtn, 1),
                         ]),
-                        createPadBtn(4),
+                        createPadBtn(4, widthBtn, heightBtn, 1),
                       ],
                     ),
                   ),
@@ -227,47 +218,5 @@ class _BallShooterState extends State<BallShooter> {
       ),
     );
   }
-
-  ClipOval createPadBtn(int btnIndex) {
-    return ClipOval(
-      child: Material(
-        color: Hexcolor('c4c4c4'),
-        child: InkWell(
-          splashColor: Colors.black12,
-          child: SizedBox(
-            width: widthBtn,
-            height: heightBtn,
-            child: returnIcon(btnIndex),
-          ),
-          onTap: () {},
-        ),
-      ),
-    );
-  }
-
-  Center returnIcon(int index) {
-    var icon;
-    if (index == 1) icon = FontAwesomeIcons.angleUp;
-    if (index == 2) icon = FontAwesomeIcons.angleLeft;
-    if (index == 3) icon = FontAwesomeIcons.angleRight;
-    if (index == 4) icon = FontAwesomeIcons.angleDown;
-    return Center(
-        child: FaIcon(
-      icon,
-      size: widthBtn - 20,
-      color: Hexcolor('B6142C'),
-    ));
-  }
 }
 
-bool isConnected = false;
-
-IconData isConnect() {
-  if (isConnected) {
-    isConnected = false;
-    return Icons.bluetooth_connected;
-  } else {
-    isConnected = false;
-    return Icons.bluetooth_disabled;
-  }
-}
