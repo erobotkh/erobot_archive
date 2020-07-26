@@ -15,6 +15,7 @@ Prototype and design here: https://www.figma.com/file/x1edWP3L1by9QWuI5EVUiP/E-R
 
 # Structure
 main.dart
+
 screens/
 
 - arduino_doc/arduin.doc.dart        //Arduino Documents (function page)
