@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math';
+import 'package:page_transition/page_transition.dart';
+import 'package:erobot_app/screens/arduino_doc/arduino_doc.dart';
 
 double widthBtn = 55;
 double heightBtn = 55;
@@ -56,7 +58,6 @@ Center returnIcon(int index, double widthBtn, int screenNum) {
     color: screenNum == 1 ? Hexcolor('B6142C') : Hexcolor('03A0B0'),
   ));
 }
-
 
 var listNum = [0, 1, 2, 3, 4];
 int randomNum = listNum[Random().nextInt(listNum.length)];
@@ -159,7 +160,14 @@ Widget buildBtn(
                   borderRadius: BorderRadius.all(Radius.circular(14.0))),
               onPressed: () {
                 String routeP;
-                if (cardIndex == 0) routeP = '/ard_doc';
+                if (cardIndex == 0) {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          child: ArduinoDoc(),
+                          duration: Duration(milliseconds: 500),
+                          type: PageTransitionType.fade));
+                }
                 if (cardIndex == 1) routeP = '/sender';
                 if (cardIndex == 2) routeP = '/shooter';
                 if (cardIndex == 3) routeP = '/ard_car';
@@ -216,5 +224,3 @@ Widget buildBtn(
         ])),
   );
 }
-
-
