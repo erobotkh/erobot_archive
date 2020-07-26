@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
-import 'controller_supplier.dart';
+import '../supplier/widget_supplier.dart';
 //import 'package:page_transition/page_transition.dart';
 //import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
