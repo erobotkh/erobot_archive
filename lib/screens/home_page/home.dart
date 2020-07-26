@@ -1,4 +1,5 @@
 import 'dart:math';
+//import 'package:erobot_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,6 +14,46 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Future<bool> _onBackPressed() {
+    return showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            backgroundColor: Color(0xFF161F28),
+            title: Text(
+              'Are you sure?',
+              style: TextStyle(
+                  fontFamily: 'Raleway',
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                  fontSize: 18),
+            ),
+            content: Text(
+              'Do you want to exit an App',
+              style: TextStyle(
+                  fontFamily: 'Raleway',
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                  fontSize: 16),
+            ),
+            actions: <Widget>[
+              InkWell(
+                onTap: () => Navigator.of(context).pop(false),
+                child: _dialogBtn('No'),
+              ),
+              SizedBox(height: 40),
+              GestureDetector(
+                onTap: () => Navigator.of(context).pop(true),
+                child: _dialogBtn('Yes'),
+              ),
+              SizedBox(
+                width: 10,
+              )
+            ],
+          ),
+        ) ??
+        false;
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -21,74 +62,91 @@ class _HomeScreenState extends State<HomeScreen> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return Scaffold(
-        appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 13),
-            child: Builder(
-                builder: (context) => IconButton(
-                    icon: FaIcon(
-                      FontAwesomeIcons.alignLeft,
-                      size: 20,
-                    ),
-                    onPressed: () => Scaffold.of(context).openDrawer())),
+    return WillPopScope(
+      onWillPop: _onBackPressed,
+      child: Scaffold(
+          appBar: AppBar(
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 13),
+              child: Builder(
+                  builder: (context) => IconButton(
+                      icon: FaIcon(
+                        FontAwesomeIcons.alignLeft,
+                        size: 20,
+                      ),
+                      onPressed: () => Scaffold.of(context).openDrawer())),
+            ),
+            title: Text(
+              'E-Robot',
+              style: TextStyle(
+                  fontFamily: 'Raleway',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18),
+            ),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(
+                  _heartIcon(),
+                  color: Colors.white,
+                ),
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onPressed: () {
+                  randomNum = listNum[Random().nextInt(listNum.length)];
+                  Navigator.pushReplacement(
+                      context,
+                      PageTransition(
+                          child: HomeScreen(),
+                          duration: Duration(milliseconds: 1000),
+                          type: PageTransitionType.fade));
+                },
+              )
+            ],
           ),
-          title: Text(
-            'E-Robot',
-            style: TextStyle(
-                fontFamily: 'Raleway',
-                fontWeight: FontWeight.w500,
-                fontSize: 18),
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                _heartIcon(),
-                color: Colors.white,
-              ),
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onPressed: () {
-                randomNum = listNum[Random().nextInt(listNum.length)];
-                Navigator.push(
-                    context,
-                    PageTransition(
-                        child: HomeScreen(),
-                        duration: Duration(milliseconds: 1000),
-                        type: PageTransitionType.fade));
-              },
-            )
-          ],
-        ),
-        drawer: MainDrawer(),
-        body: StaggeredGridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 3,
-          mainAxisSpacing: 3,
-          children: <Widget>[
-            _buildBtn(
-                'Arduino Documents', 'Learn how to build a robot', 0, context),
-            _buildBtn(
-                'Sender', 'to Send text to arduino via Bluetooth', 1, context),
-            _buildBtn(
-                'Ball Shooter',
-                'to Control ball shooter arduino car, servo, and speed',
-                2,
-                context),
-            _buildBtn('Arduino Car',
-                'Remoter to Control Arduino Car with speed', 3, context),
-            _buildBtn('IR Remoter', 'to Control Light and Buzzer Arduino', 4,
-                context),
-          ],
-          staggeredTiles: [
-            StaggeredTile.extent(2, 150),
-            StaggeredTile.extent(1, 150),
-            StaggeredTile.extent(1, 150),
-            StaggeredTile.extent(1, 150),
-            StaggeredTile.extent(1, 150),
-          ],
-        ));
+          drawer: MainDrawer(),
+          body: StaggeredGridView.count(
+            crossAxisCount: 2,
+            crossAxisSpacing: 3,
+            mainAxisSpacing: 3,
+            children: <Widget>[
+              _buildBtn('Arduino Documents', 'Learn how to build a robot', 0,
+                  context),
+              _buildBtn('Sender', 'to Send text to arduino via Bluetooth', 1,
+                  context),
+              _buildBtn(
+                  'Ball Shooter',
+                  'to Control ball shooter arduino car, servo, and speed',
+                  2,
+                  context),
+              _buildBtn('Arduino Car',
+                  'Remoter to Control Arduino Car with speed', 3, context),
+              _buildBtn('IR Remoter', 'to Control Light and Buzzer Arduino', 4,
+                  context),
+            ],
+            staggeredTiles: [
+              StaggeredTile.extent(2, 150),
+              StaggeredTile.extent(1, 150),
+              StaggeredTile.extent(1, 150),
+              StaggeredTile.extent(1, 150),
+              StaggeredTile.extent(1, 150),
+            ],
+          )),
+    );
   }
+}
+
+Widget _dialogBtn(String yRN) {
+  return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: Text(
+          yRN,
+          style: TextStyle(
+              fontFamily: 'Raleway',
+              fontWeight: FontWeight.w500,
+              color: Colors.white,
+              fontSize: 16),
+        ),
+      );
 }
 
 Widget _buildBtn(
@@ -187,6 +245,7 @@ Widget _buildBtn(
 var listNum = [0, 1, 2, 3, 4];
 int randomNum = listNum[Random().nextInt(listNum.length)];
 bool favoriteC = true;
+
 IconData _heartIcon() {
   if (favoriteC) {
     favoriteC = false;

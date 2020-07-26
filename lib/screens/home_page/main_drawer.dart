@@ -125,7 +125,7 @@ class _MainDrawerState extends State<MainDrawer> {
                           fontWeight: FontWeight.w500),
                     ),
                     onTap: () {
-                      Navigator.pushNamed(context, '/');
+                      Navigator.pushReplacementNamed(context, '/');
                       //exit(0);
                     },
                   ),

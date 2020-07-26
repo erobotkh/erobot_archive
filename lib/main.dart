@@ -74,11 +74,11 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPage() {
-    Navigator.push(
+    Navigator.pushReplacement(
         context,
         PageTransition(
             child: HomeScreen(),
-            duration: Duration(milliseconds: 450),
+            duration: Duration(milliseconds: 550),
             type: PageTransitionType.fade));
   }
 
