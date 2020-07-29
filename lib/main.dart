@@ -176,6 +176,8 @@ class _RootState extends State<Root> {
   MenuPositionController _menuPositionController;
   bool userPageDragging = false;
 
+  List<String> titleName = ['E-Robot', 'Education', 'About Us', 'Profile'];
+
   @override
   void initState() {
     _menuPositionController = MenuPositionController(initPosition: 0);
@@ -206,7 +208,7 @@ class _RootState extends State<Root> {
                     onPressed: () => Scaffold.of(context).openDrawer())),
           ),
           title: Text(
-            'E-Robot',
+            titleName[selectedItem],
             style: TextStyle(
                 fontFamily: 'Raleway',
                 fontWeight: FontWeight.w500,
