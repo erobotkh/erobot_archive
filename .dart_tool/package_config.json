@@ -26,6 +26,12 @@
       "languageVersion": "2.4"
     },
     {
+      "name": "bubbled_navigation_bar",
+      "rootUri": "file:///home/thea/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/bubbled_navigation_bar-0.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
       "name": "charcode",
       "rootUri": "file:///home/thea/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/charcode-1.1.3",
       "packageUri": "lib/",
@@ -206,7 +212,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-07-26T14:08:03.428235Z",
+  "generated": "2020-07-29T08:19:48.232961Z",
   "generator": "pub",
   "generatorVersion": "2.8.4"
 }

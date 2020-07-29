@@ -14,13 +14,6 @@ class _ArduinoDocState extends State<ArduinoDoc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Arduino Documents',
-          style: TextStyle(
-              fontFamily: 'Raleway', fontWeight: FontWeight.w500, fontSize: 18),
-        ),
-      ),
       body: ListView(
         children: <Widget>[
           buildCard('Arduino Documents', 'Learn how to build a robot', 0, context, 'arduino_doc.png'),
