@@ -59,43 +59,6 @@ class _MainDrawerState extends State<MainDrawer> {
                   ),
                   ListTile(
                     leading: Icon(
-                      Icons.person,
-                      color: Colors.white,
-                    ),
-                    title: Text(
-                      'Log in',
-                      style: TextStyle(
-                          fontFamily: 'Raleway',
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    onTap: () {
-                      Navigator.pushNamed(context, '/loginC');
-                    },
-                  ),
-                  InkWell(
-                    splashColor: Colors.white,
-                    child: ListTile(
-                      leading: Icon(
-                        Icons.people,
-                        color: Colors.white,
-                      ),
-                      title: Text(
-                        'About us',
-                        style: TextStyle(
-                            fontFamily: 'Raleway',
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      onTap: () {
-                        Navigator.pushNamed(context, '/aboutus');
-                      },
-                    ),
-                  ),
-                  ListTile(
-                    leading: Icon(
                       Icons.feedback,
                       color: Colors.white,
                     ),

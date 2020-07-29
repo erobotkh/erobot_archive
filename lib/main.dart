@@ -84,7 +84,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.pushReplacement(
         context,
         PageTransition(
-            child: Root(),
+            child: Root(value: 0),
             duration: Duration(milliseconds: 550),
             type: PageTransitionType.fade));
   }
@@ -163,14 +163,19 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
+// ignore: must_be_immutable
 class Root extends StatefulWidget {
-  Root({Key key}) : super(key: key);
+  int value;
+  Root({Key key, @required this.value}) : super(key: key);
   @override
-  _RootState createState() => _RootState();
+  RootState createState() => RootState(value);
 }
 
-class _RootState extends State<Root> {
+
+class RootState extends State<Root> {
   int selectedItem = 0;
+  int value;
+  RootState(this.value);
   var _pages = [HomeScreen(), ArduinoDoc(), AboutUs(), LogInChoice()];
   PageController _pageController;
   MenuPositionController _menuPositionController;
@@ -180,9 +185,10 @@ class _RootState extends State<Root> {
 
   @override
   void initState() {
+    if (value == 1) selectedItem = value;
     _menuPositionController = MenuPositionController(initPosition: 0);
     _pageController =
-        PageController(initialPage: 0, keepPage: false, viewportFraction: 1.0);
+        PageController(initialPage: selectedItem, keepPage: false, viewportFraction: 1.0);
     _pageController.addListener(handlePageChange);
     super.initState();
   }
@@ -214,25 +220,13 @@ class _RootState extends State<Root> {
                 fontWeight: FontWeight.w500,
                 fontSize: 18),
           ),
-          // actions: <Widget>[
-          //   IconButton(
-          //     icon: Icon(
-          //       heartIcon(),
-          //       color: Colors.white,
-          //     ),
-          //     splashColor: Colors.transparent,
-          //     highlightColor: Colors.transparent,
-          //     onPressed: () {
-          //       randomNum = listNum[Random().nextInt(listNum.length)];
-          //       Navigator.pushReplacement(
-          //           context,
-          //           PageTransition(
-          //               child: Root(),
-          //               duration: Duration(milliseconds: 1000),
-          //               type: PageTransitionType.fade));
-          //     },
-          //   )
-          // ],
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.school),
+                onPressed: () {
+
+                })
+          ],
         ),
         drawer: MainDrawer(),
         body: PageView(
@@ -240,7 +234,6 @@ class _RootState extends State<Root> {
           onPageChanged: (index) {
             setState(() {
               selectedItem = index;
-              
             });
           },
           controller: _pageController,
