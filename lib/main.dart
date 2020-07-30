@@ -23,6 +23,7 @@ import 'screens/drawer_bar/feedback.dart';
 import 'screens/login_page/log_choice.dart';
 import 'screens/login_page/login.dart';
 import 'package:erobot_app/screens/home_page/main_drawer.dart';
+import 'package:erobot_app/screens/farm_assistant/farm_assistant.dart';
 //import 'package:erobot_app/screens/supplier/widget_supplier.dart';
 
 Map<int, Color> color = {
@@ -55,6 +56,7 @@ void main() => runApp(MaterialApp(
         '/loginP': (context) => LoginPage(),
         '/homescreen': (context) => HomeScreen(),
         '/ard_doc': (context) => ArduinoDoc(),
+        '/farm_assistant': (context) => FarmAssistant(),
         '/sender': (context) => Sender(),
         '/shooter': (context) => BallShooter(),
         '/ard_car': (context) => ArduinoCar(),
@@ -168,14 +170,14 @@ class Root extends StatefulWidget {
   int value;
   Root({Key key, @required this.value}) : super(key: key);
   @override
-  RootState createState() => RootState(value);
+  _RootState createState() => _RootState(value);
 }
 
 
-class RootState extends State<Root> {
+class _RootState extends State<Root> {
   int selectedItem = 0;
   int value;
-  RootState(this.value);
+  _RootState(this.value);
   var _pages = [HomeScreen(), ArduinoDoc(), AboutUs(), LogInChoice()];
   PageController _pageController;
   MenuPositionController _menuPositionController;
@@ -220,13 +222,6 @@ class RootState extends State<Root> {
                 fontWeight: FontWeight.w500,
                 fontSize: 18),
           ),
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.school),
-                onPressed: () {
-
-                })
-          ],
         ),
         drawer: MainDrawer(),
         body: PageView(

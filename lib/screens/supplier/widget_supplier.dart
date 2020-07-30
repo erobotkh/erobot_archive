@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math';
-import 'package:page_transition/page_transition.dart';
+//import 'package:page_transition/page_transition.dart';
 //import 'package:erobot_app/screens/arduino_doc/arduino_doc.dart';
-import 'package:erobot_app/main.dart';
+//import 'package:erobot_app/main.dart';
 //import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 //import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
@@ -163,20 +163,12 @@ Widget buildBtn(
                   borderRadius: BorderRadius.all(Radius.circular(14.0))),
               onPressed: () {
                 String routeP;
-                if (cardIndex == 0) {
-                  Navigator.pushReplacement(
-                      context,
-                      PageTransition(
-                          child: Root(value: 1),
-                          duration: Duration(milliseconds: 550),
-                          type: PageTransitionType.fade));
-                } else {
-                  if (cardIndex == 1) routeP = '/sender';
-                  if (cardIndex == 2) routeP = '/shooter';
-                  if (cardIndex == 3) routeP = '/ard_car';
-                  if (cardIndex == 4) routeP = '/ir_remote';
-                  Navigator.pushNamed(context, routeP);
-                }
+                if (cardIndex == 0) routeP = '/farm_assistant';
+                if (cardIndex == 1) routeP = '/sender';
+                if (cardIndex == 2) routeP = '/shooter';
+                if (cardIndex == 3) routeP = '/ard_car';
+                if (cardIndex == 4) routeP = '/ir_remote';
+                Navigator.pushNamed(context, routeP);
               },
               splashColor: Color.fromRGBO(255, 255, 255, .2),
               child: Column(
