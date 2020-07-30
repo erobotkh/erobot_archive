@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisSpacing: 3,
           children: <Widget>[
             buildBtn(
-                'Farm Assistant', 'Make your farming smart', 0, context),
+                'Farm Assistant', 'Make your farming smarter', 0, context),
             buildBtn(
                 'Sender', 'to Send text to arduino via Bluetooth', 1, context),
             buildBtn(

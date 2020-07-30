@@ -18,7 +18,7 @@ import 'screens/controller/ball_shooter.dart';
 import 'screens/controller/arduino_car.dart';
 import 'screens/ir_remoter/ir_remoter.dart';
 import 'screens/home_page/home.dart';
-import 'screens/drawer_bar/aboutus.dart';
+import 'screens/aboutus/aboutus.dart';
 import 'screens/drawer_bar/feedback.dart';
 import 'screens/login_page/log_choice.dart';
 import 'screens/login_page/login.dart';
@@ -86,7 +86,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.pushReplacement(
         context,
         PageTransition(
-            child: Root(value: 0),
+            child: Root(),
             duration: Duration(milliseconds: 550),
             type: PageTransitionType.fade));
   }
@@ -168,32 +168,33 @@ class _SplashScreenState extends State<SplashScreen> {
 // ignore: must_be_immutable
 class Root extends StatefulWidget {
   int value;
-  Root({Key key, @required this.value}) : super(key: key);
+  Root({Key key}) : super(key: key);
   @override
-  _RootState createState() => _RootState(value);
+  _RootState createState() => _RootState();
 }
-
 
 class _RootState extends State<Root> {
   int selectedItem = 0;
-  int value;
-  _RootState(this.value);
-  var _pages = [HomeScreen(), ArduinoDoc(), AboutUs(), LogInChoice()];
-  PageController _pageController;
+  static PageController _pageController;
   MenuPositionController _menuPositionController;
   bool userPageDragging = false;
 
   List<String> titleName = ['E-Robot', 'Education', 'About Us', 'Profile'];
-
   @override
   void initState() {
-    if (value == 1) selectedItem = value;
     _menuPositionController = MenuPositionController(initPosition: 0);
-    _pageController =
-        PageController(initialPage: selectedItem, keepPage: false, viewportFraction: 1.0);
+    _pageController = PageController(
+        initialPage: selectedItem, keepPage: false, viewportFraction: 1.0);
     _pageController.addListener(handlePageChange);
     super.initState();
   }
+
+  var _pages = [
+    HomeScreen(),
+    ArduinoDoc(),
+    AboutUs(),
+    LogInChoice()
+  ];
 
   void handlePageChange() {
     _menuPositionController.absolutePosition = _pageController.page;
@@ -205,6 +206,7 @@ class _RootState extends State<Root> {
       onWillPop: _onBackPressed,
       child: Scaffold(
         appBar: AppBar(
+          elevation: selectedItem == 2 ? 0 : 5,
           leading: Padding(
             padding: const EdgeInsets.only(left: 13),
             child: Builder(
