@@ -188,6 +188,7 @@ class _RootState extends State<Root> {
     HomeScreen(),
     ArduinoDoc(),
     DefaultTabController(
+        //About Us
         length: 2,
         child: Scaffold(
           backgroundColor: Hexcolor('172634'),
@@ -202,12 +203,8 @@ class _RootState extends State<Root> {
                   fontSize: 15),
               indicatorColor: Colors.white,
               tabs: <Widget>[
-                Tab(
-                  text: 'About Member',
-                ),
-                Tab(
-                  text: 'Team Reputation',
-                )
+                Tab(text: 'About Member'),
+                Tab(text: 'Team Reputation')
               ],
             ),
           ),
