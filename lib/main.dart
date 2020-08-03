@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:preload_page_view/preload_page_view.dart';
 
 //Screens
 import 'package:erobot_app/screens/arduino_doc/arduino_doc.dart';
@@ -165,20 +166,19 @@ class Root extends StatefulWidget {
 
 class _RootState extends State<Root> {
   int pageIndex = 0;
-  static PageController _pageController;
+  static PreloadPageController _pageController;
   MenuPositionController _menuPositionController;
   bool userPageDragging = false;
 
   @override
   void initState() {
     super.initState();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
     _menuPositionController = MenuPositionController(initPosition: 0);
-    _pageController = PageController(
-        initialPage: pageIndex, keepPage: false, viewportFraction: 1.0);
+    _pageController = PreloadPageController(
+        initialPage: pageIndex, keepPage: false, viewportFraction: 1);
     _pageController.addListener(handlePageChange);
   }
 
@@ -215,15 +215,17 @@ class _RootState extends State<Root> {
           ),
         ),
         drawer: MainDrawer(),
-        body: PageView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          children: _pages,
-          onPageChanged: (index) {
-            setState(() {
-              pageIndex = index;
-            });
-          },
-          controller: _pageController,
+        body: Container(
+          child: PreloadPageView(
+            children: _pages,
+            //physics: const AlwaysScrollableScrollPhysics(),
+            onPageChanged: (index) {
+              setState(() {
+                pageIndex = index;
+              });
+            },
+            controller: _pageController,
+          ),
         ),
         bottomNavigationBar: BubbledNavigationBar(
           defaultBubbleColor: Colors.white,
