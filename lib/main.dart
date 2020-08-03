@@ -11,21 +11,18 @@ import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 //Screens
-import 'package:erobot_app/screens/arduino_doc/arduino_doc.dart'
-    show ArduinoDoc;
-import 'package:erobot_app/screens/sender/sender.dart' show Sender;
-import 'package:erobot_app/screens/controller/ball_shooter.dart'
-    show BallShooter;
-import 'package:erobot_app/screens/controller/arduino_car.dart' show ArduinoCar;
-import 'package:erobot_app/screens/ir_remoter/ir_remoter.dart' show IrRemoter;
-import 'package:erobot_app/screens/home_page/home.dart' show HomeScreen;
-import 'package:erobot_app/screens/aboutus/aboutus.dart' show AboutUs;
-import 'package:erobot_app/screens/drawer_bar/feedback.dart' show FeedbackApp;
-import 'package:erobot_app/screens/login_page/log_choice.dart' show LogInChoice;
-import 'package:erobot_app/screens/login_page/login.dart' show LoginPage;
-import 'package:erobot_app/screens/home_page/main_drawer.dart' show MainDrawer;
-import 'package:erobot_app/screens/farm_assistant/farm_assistant.dart'
-    show FarmAssistant;
+import 'package:erobot_app/screens/arduino_doc/arduino_doc.dart';
+import 'package:erobot_app/screens/sender/sender.dart';
+import 'package:erobot_app/screens/controller/ball_shooter.dart';
+import 'package:erobot_app/screens/controller/arduino_car.dart';
+import 'package:erobot_app/screens/ir_remoter/ir_remoter.dart';
+import 'package:erobot_app/screens/home_page/home.dart';
+import 'package:erobot_app/screens/aboutus/aboutus.dart';
+import 'package:erobot_app/screens/drawer_bar/feedback.dart';
+import 'package:erobot_app/screens/login_page/log_choice.dart';
+import 'package:erobot_app/screens/login_page/login.dart';
+import 'package:erobot_app/screens/drawer_bar/main_drawer.dart';
+import 'package:erobot_app/screens/farm_assistant/farm_assistant.dart';
 
 Map<int, Color> color = {
   50: Color.fromRGBO(136, 14, 79, .1),
@@ -49,7 +46,7 @@ void main() => runApp(MaterialApp(
         primarySwatch: colorCustom,
         canvasColor: colorCustom2,
       ),
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
         '/': (context) => SplashScreen(),
