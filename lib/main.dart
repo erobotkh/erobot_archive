@@ -69,7 +69,8 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final delay = 3;
+  final delay = 5;
+
   @override
   void initState() {
     super.initState();
@@ -156,9 +157,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-// ignore: must_be_immutable
 class Root extends StatefulWidget {
-  int value;
   Root({Key key}) : super(key: key);
   @override
   _RootState createState() => _RootState();
@@ -172,14 +171,13 @@ class _RootState extends State<Root> {
 
   @override
   void initState() {
-    super.initState();
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
     _menuPositionController = MenuPositionController(initPosition: 0);
     _pageController = PreloadPageController(
-        initialPage: pageIndex, keepPage: false, viewportFraction: 1);
+        initialPage: pageIndex, keepPage: true, viewportFraction: 1);
     _pageController.addListener(handlePageChange);
+    super.initState();
   }
 
   List<String> titleName = ['E-Robot', 'Education', 'About Us', 'Profile'];
@@ -218,12 +216,13 @@ class _RootState extends State<Root> {
         body: Container(
           child: PreloadPageView(
             children: _pages,
-            //physics: const AlwaysScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             onPageChanged: (index) {
               setState(() {
                 pageIndex = index;
               });
             },
+            preloadPagesCount: 4,
             controller: _pageController,
           ),
         ),
@@ -235,30 +234,22 @@ class _RootState extends State<Root> {
           itemMargin: EdgeInsets.symmetric(horizontal: 0),
           iconRightMargin: 10,
           onTap: (_index) async {
-            var duration = 600;
+            var duration = 300;
             if (_index == 3 && pageIndex == 0) {
-              await _pageController.animateToPage(
-                2,
-                curve: Curves.easeInOut,
-                duration: Duration(milliseconds: duration),
-              );
-              _pageController.animateToPage(
-                3,
-                curve: Curves.easeInOut,
-                duration: Duration(milliseconds: duration + 100),
-              );
+              await _pageController.animateToPage(2,
+                  curve: Curves.easeInOut,
+                  duration: Duration(milliseconds: duration));
+              _pageController.animateToPage(3,
+                  curve: Curves.easeInOut,
+                  duration: Duration(milliseconds: duration + 100));
             }
             if (_index == 0 && pageIndex == 3) {
-              await _pageController.animateToPage(
-                1,
-                curve: Curves.easeInOut,
-                duration: Duration(milliseconds: duration),
-              );
-              _pageController.animateToPage(
-                0,
-                curve: Curves.easeInOut,
-                duration: Duration(milliseconds: duration + 100),
-              );
+              await _pageController.animateToPage(1,
+                  curve: Curves.easeInOut,
+                  duration: Duration(milliseconds: duration));
+              _pageController.animateToPage(0,
+                  curve: Curves.easeInOut,
+                  duration: Duration(milliseconds: duration + 100));
             }
             if ((_index - pageIndex) == 2 || (pageIndex - _index) == 2) {
               int _indexR;
@@ -266,22 +257,16 @@ class _RootState extends State<Root> {
                 _indexR = pageIndex;
               else
                 _indexR = _index;
-              await _pageController.animateToPage(
-                _indexR + 1,
-                curve: Curves.easeInOut,
-                duration: Duration(milliseconds: duration),
-              );
-              _pageController.animateToPage(
-                _index,
-                curve: Curves.easeInOut,
-                duration: Duration(milliseconds: duration + 100),
-              );
+              await _pageController.animateToPage(_indexR + 1,
+                  curve: Curves.easeInOut,
+                  duration: Duration(milliseconds: duration));
+              _pageController.animateToPage(_index,
+                  curve: Curves.easeInOut,
+                  duration: Duration(milliseconds: duration + 100));
             } else {
-              _pageController.animateToPage(
-                _index,
-                curve: Curves.easeInOut,
-                duration: Duration(milliseconds: duration),
-              );
+              _pageController.animateToPage(_index,
+                  curve: Curves.easeInOut,
+                  duration: Duration(milliseconds: duration + 100));
             }
           },
           items: <BubbledNavigationBarItem>[
