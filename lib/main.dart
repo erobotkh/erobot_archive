@@ -3,7 +3,6 @@ import 'dart:async';
 //Packages
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -52,15 +51,12 @@ void main() => runApp(MaterialApp(
         '/': (context) => SplashScreen(),
         '/loginC': (context) => LogInChoice(),
         '/loginP': (context) => LoginPage(),
-        '/homescreen': (context) => HomeScreen(),
-        '/ard_doc': (context) => ArduinoDoc(),
         '/farm_assistant': (context) => FarmAssistant(),
         '/sender': (context) => Sender(),
         '/shooter': (context) => BallShooter(),
         '/ard_car': (context) => ArduinoCar(),
         '/ir_remote': (context) => IrRemoter(),
         '/feedback': (context) => FeedbackApp(),
-        '/aboutus': (context) => AboutUs(),
       },
     ));
 
@@ -117,28 +113,24 @@ class _SplashScreenState extends State<SplashScreen> {
                     SizedBox(
                       height: 8,
                     ),
-                    Shimmer.fromColors(
-                      baseColor: Colors.red,
-                      highlightColor: Color.fromRGBO(22, 31, 40, 1),
-                      child: RichText(
-                        text: TextSpan(
-                            style: TextStyle(
-                              fontFamily: 'Raleway',
-                              color: Color.fromRGBO(22, 31, 40, 1),
-                              fontWeight: FontWeight.w300,
-                              fontSize: 15,
-                            ),
-                            children: <TextSpan>[
-                              TextSpan(text: 'EDUCATION IS '),
-                              TextSpan(
-                                  text: 'POWER',
-                                  style: TextStyle(
-                                    color: Colors.red,
-                                  )),
-                              TextSpan(text: '.')
-                            ]),
-                      ),
-                    )
+                    RichText(
+                      text: TextSpan(
+                          style: TextStyle(
+                            fontFamily: 'Raleway',
+                            color: Color.fromRGBO(22, 31, 40, 1),
+                            fontWeight: FontWeight.w300,
+                            fontSize: 15,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(text: 'EDUCATION IS '),
+                            TextSpan(
+                                text: 'POWER',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                )),
+                            TextSpan(text: '.')
+                          ]),
+                    ),
                   ])),
               Container(
                 child: Column(children: <Widget>[

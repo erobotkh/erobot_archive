@@ -27,7 +27,6 @@ dependencies:
   font_awesome_flutter: ^8.8.1
   flutter_staggered_grid_view: ^0.3.1
   page_transition: ^1.1.6
-  shimmer: ^1.1.1 #animation on text
   sleek_circular_slider: ^1.1.0
   bubbled_navigation_bar: ^0.0.3
 
