@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:preload_page_view/preload_page_view.dart';
+import 'package:flutter/gestures.dart';
 
 //Screens
 import 'package:erobot_app/screens/arduino_doc/arduino_doc.dart';
@@ -17,12 +18,14 @@ import 'package:erobot_app/screens/controller/ball_shooter.dart';
 import 'package:erobot_app/screens/controller/arduino_car.dart';
 import 'package:erobot_app/screens/ir_remoter/ir_remoter.dart';
 import 'package:erobot_app/screens/home_page/home.dart';
-import 'package:erobot_app/screens/aboutus/aboutus.dart';
+//import 'package:erobot_app/screens/aboutus/aboutus.dart';
 import 'package:erobot_app/screens/drawer_bar/feedback.dart';
 import 'package:erobot_app/screens/login_page/log_choice.dart';
 import 'package:erobot_app/screens/login_page/login.dart';
 import 'package:erobot_app/screens/drawer_bar/main_drawer.dart';
 import 'package:erobot_app/screens/farm_assistant/farm_assistant.dart';
+import 'package:erobot_app/screens/aboutus/about_member.dart';
+import 'package:erobot_app/screens/aboutus/team_reputation.dart';
 
 Map<int, Color> color = {
   50: Color.fromRGBO(136, 14, 79, .1),
@@ -181,7 +184,52 @@ class _RootState extends State<Root> {
   }
 
   List<String> titleName = ['E-Robot', 'Education', 'About Us', 'Profile'];
-  var _pages = [HomeScreen(), ArduinoDoc(), AboutUs(), LogInChoice()];
+  var _pages = [
+    HomeScreen(),
+    ArduinoDoc(),
+    DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          backgroundColor: Hexcolor('172634'),
+          appBar: AppBar(
+            automaticallyImplyLeading: false, //ensure that no back btn
+            elevation: 5,
+            title: TabBar(
+              dragStartBehavior: DragStartBehavior.start,
+              labelStyle: TextStyle(
+                  fontFamily: 'Raleway',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15),
+              indicatorColor: Colors.white,
+              tabs: <Widget>[
+                Tab(
+                  text: 'About Member',
+                ),
+                Tab(
+                  text: 'Team Reputation',
+                )
+              ],
+            ),
+          ),
+          body: NotificationListener(
+            onNotification: (overscroll) {
+              if (overscroll is OverscrollNotification &&
+                  overscroll.overscroll != 0 &&
+                  overscroll.dragDetails != null) {
+                _pageController.animateToPage(overscroll.overscroll < 0 ? 1 : 3,
+                    curve: Curves.easeInOut,
+                    duration: Duration(milliseconds: 400));
+              }
+              return true;
+            },
+            child: TabBarView(children: [
+              AboutMember(),
+              TeamReputation(),
+            ]),
+          ),
+        )),
+    LogInChoice()
+  ];
 
   void handlePageChange() {
     _menuPositionController.absolutePosition = _pageController.page;

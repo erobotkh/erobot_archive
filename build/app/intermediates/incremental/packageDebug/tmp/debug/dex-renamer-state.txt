@@ -1,4 +1,4 @@
-#Mon Aug 03 19:53:24 ICT 2020
+#Mon Aug 03 21:12:20 ICT 2020
 base.0=/home/thea/Coding/Projects/erobot_app/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
