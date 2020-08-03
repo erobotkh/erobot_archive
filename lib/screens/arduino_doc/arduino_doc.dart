@@ -1,4 +1,4 @@
-import 'package:erobot_app/screens/supplier/widget_supplier.dart';
+import 'package:erobot_app/supplier/widget_supplier.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 

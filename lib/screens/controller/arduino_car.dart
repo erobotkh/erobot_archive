@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
-import '../supplier/widget_supplier.dart';
+import 'package:erobot_app/supplier/widget_supplier.dart';
 
 class ArduinoCar extends StatefulWidget {
   ArduinoCar({Key key}) : super(key: key);

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-//import 'dart:math';
 
-double widthBtn = 55;
-double heightBtn = 55;
+const double widthBtn = 55;
+const double heightBtn = 55;
 double speed = 5;
 double speedTMP = 5;
 double servo = 5;
