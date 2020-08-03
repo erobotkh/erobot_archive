@@ -2,14 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-class AboutMember extends StatefulWidget {
-  AboutMember({Key key}) : super(key: key);
-
-  @override
-  _AboutMemberState createState() => _AboutMemberState();
-}
-
-class _AboutMemberState extends State<AboutMember> {
+class AboutMember extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

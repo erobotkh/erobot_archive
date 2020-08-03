@@ -1,5 +1,4 @@
 import 'dart:async';
-//import 'dart:math';
 
 //Packages
 import 'package:flutter/material.dart';
@@ -12,19 +11,21 @@ import 'package:bubbled_navigation_bar/bubbled_navigation_bar.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 //Screens
-import 'screens/arduino_doc/arduino_doc.dart';
-import 'screens/sender/sender.dart';
-import 'screens/controller/ball_shooter.dart';
-import 'screens/controller/arduino_car.dart';
-import 'screens/ir_remoter/ir_remoter.dart';
-import 'screens/home_page/home.dart';
-import 'screens/aboutus/aboutus.dart';
-import 'screens/drawer_bar/feedback.dart';
-import 'screens/login_page/log_choice.dart';
-import 'screens/login_page/login.dart';
-import 'package:erobot_app/screens/home_page/main_drawer.dart';
-import 'package:erobot_app/screens/farm_assistant/farm_assistant.dart';
-//import 'package:erobot_app/screens/supplier/widget_supplier.dart';
+import 'package:erobot_app/screens/arduino_doc/arduino_doc.dart'
+    show ArduinoDoc;
+import 'package:erobot_app/screens/sender/sender.dart' show Sender;
+import 'package:erobot_app/screens/controller/ball_shooter.dart'
+    show BallShooter;
+import 'package:erobot_app/screens/controller/arduino_car.dart' show ArduinoCar;
+import 'package:erobot_app/screens/ir_remoter/ir_remoter.dart' show IrRemoter;
+import 'package:erobot_app/screens/home_page/home.dart' show HomeScreen;
+import 'package:erobot_app/screens/aboutus/aboutus.dart' show AboutUs;
+import 'package:erobot_app/screens/drawer_bar/feedback.dart' show FeedbackApp;
+import 'package:erobot_app/screens/login_page/log_choice.dart' show LogInChoice;
+import 'package:erobot_app/screens/login_page/login.dart' show LoginPage;
+import 'package:erobot_app/screens/home_page/main_drawer.dart' show MainDrawer;
+import 'package:erobot_app/screens/farm_assistant/farm_assistant.dart'
+    show FarmAssistant;
 
 Map<int, Color> color = {
   50: Color.fromRGBO(136, 14, 79, .1),
@@ -48,7 +49,7 @@ void main() => runApp(MaterialApp(
         primarySwatch: colorCustom,
         canvasColor: colorCustom2,
       ),
-      //debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       initialRoute: '/',
       routes: {
         '/': (context) => SplashScreen(),
@@ -174,27 +175,26 @@ class Root extends StatefulWidget {
 }
 
 class _RootState extends State<Root> {
-  int selectedItem = 0;
+  int pageIndex = 0;
   static PageController _pageController;
   MenuPositionController _menuPositionController;
   bool userPageDragging = false;
 
-  List<String> titleName = ['E-Robot', 'Education', 'About Us', 'Profile'];
   @override
   void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     _menuPositionController = MenuPositionController(initPosition: 0);
     _pageController = PageController(
-        initialPage: selectedItem, keepPage: false, viewportFraction: 1.0);
+        initialPage: pageIndex, keepPage: false, viewportFraction: 1.0);
     _pageController.addListener(handlePageChange);
-    super.initState();
   }
 
-  var _pages = [
-    HomeScreen(),
-    ArduinoDoc(),
-    AboutUs(),
-    LogInChoice()
-  ];
+  List<String> titleName = ['E-Robot', 'Education', 'About Us', 'Profile'];
+  var _pages = [HomeScreen(), ArduinoDoc(), AboutUs(), LogInChoice()];
 
   void handlePageChange() {
     _menuPositionController.absolutePosition = _pageController.page;
@@ -206,7 +206,7 @@ class _RootState extends State<Root> {
       onWillPop: _onBackPressed,
       child: Scaffold(
         appBar: AppBar(
-          elevation: selectedItem == 2 ? 0 : 5,
+          elevation: pageIndex == 2 ? 0 : 5,
           leading: Padding(
             padding: const EdgeInsets.only(left: 13),
             child: Builder(
@@ -218,7 +218,7 @@ class _RootState extends State<Root> {
                     onPressed: () => Scaffold.of(context).openDrawer())),
           ),
           title: Text(
-            titleName[selectedItem],
+            titleName[pageIndex],
             style: TextStyle(
                 fontFamily: 'Raleway',
                 fontWeight: FontWeight.w500,
@@ -227,10 +227,11 @@ class _RootState extends State<Root> {
         ),
         drawer: MainDrawer(),
         body: PageView(
+          physics: const AlwaysScrollableScrollPhysics(),
           children: _pages,
           onPageChanged: (index) {
             setState(() {
-              selectedItem = index;
+              pageIndex = index;
             });
           },
           controller: _pageController,
@@ -238,25 +239,59 @@ class _RootState extends State<Root> {
         bottomNavigationBar: BubbledNavigationBar(
           defaultBubbleColor: Colors.white,
           backgroundColor: Hexcolor('172634'),
-          initialIndex: selectedItem,
+          initialIndex: pageIndex,
           controller: _menuPositionController,
           itemMargin: EdgeInsets.symmetric(horizontal: 0),
           iconRightMargin: 10,
-          onTap: (index) {
+          onTap: (_index) async {
             var duration = 600;
-            var curveStyle = Curves.easeInOutQuad;
-            if ((index == 0 && selectedItem == 3) ||
-                (index == 3 && selectedItem == 0)) {
-              duration = 1000;
+            if (_index == 3 && pageIndex == 0) {
+              await _pageController.animateToPage(
+                2,
+                curve: Curves.easeInOut,
+                duration: Duration(milliseconds: duration),
+              );
+              _pageController.animateToPage(
+                3,
+                curve: Curves.easeInOut,
+                duration: Duration(milliseconds: duration + 100),
+              );
             }
-            if ((index - selectedItem) == 2 || (selectedItem - index) == 2) {
-              duration = 800;
+            if (_index == 0 && pageIndex == 3) {
+              await _pageController.animateToPage(
+                1,
+                curve: Curves.easeInOut,
+                duration: Duration(milliseconds: duration),
+              );
+              _pageController.animateToPage(
+                0,
+                curve: Curves.easeInOut,
+                duration: Duration(milliseconds: duration + 100),
+              );
             }
-            _pageController.animateToPage(
-              index,
-              curve: curveStyle,
-              duration: Duration(milliseconds: duration),
-            );
+            if ((_index - pageIndex) == 2 || (pageIndex - _index) == 2) {
+              int _indexR;
+              if (_index > pageIndex)
+                _indexR = pageIndex;
+              else
+                _indexR = _index;
+              await _pageController.animateToPage(
+                _indexR + 1,
+                curve: Curves.easeInOut,
+                duration: Duration(milliseconds: duration),
+              );
+              _pageController.animateToPage(
+                _index,
+                curve: Curves.easeInOut,
+                duration: Duration(milliseconds: duration + 100),
+              );
+            } else {
+              _pageController.animateToPage(
+                _index,
+                curve: Curves.easeInOut,
+                duration: Duration(milliseconds: duration),
+              );
+            }
           },
           items: <BubbledNavigationBarItem>[
             BubbledNavigationBarItem(
@@ -352,12 +387,12 @@ class _RootState extends State<Root> {
             actions: <Widget>[
               InkWell(
                 onTap: () => Navigator.of(context).pop(false),
-                child: _dialogBtn('No'),
+                child: DialogBtn('No'),
               ),
               SizedBox(height: 40),
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(true),
-                child: _dialogBtn('Yes'),
+                child: DialogBtn('Yes'),
               ),
               SizedBox(
                 width: 10,
@@ -369,16 +404,22 @@ class _RootState extends State<Root> {
   }
 }
 
-Widget _dialogBtn(String yRN) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-    child: Text(
-      yRN,
-      style: TextStyle(
-          fontFamily: 'Raleway',
-          fontWeight: FontWeight.w500,
-          color: Colors.white,
-          fontSize: 16),
-    ),
-  );
+class DialogBtn extends StatelessWidget {
+  final String yRN;
+  DialogBtn(this.yRN);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      child: Text(
+        yRN,
+        style: TextStyle(
+            fontFamily: 'Raleway',
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+            fontSize: 16),
+      ),
+    );
+  }
 }

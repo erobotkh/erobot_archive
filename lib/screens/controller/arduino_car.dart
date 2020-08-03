@@ -14,12 +14,8 @@ class ArduinoCar extends StatefulWidget {
 class _ArduinoCarState extends State<ArduinoCar> {
   @override
   dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     super.dispose();
   }
 
@@ -32,8 +28,6 @@ class _ArduinoCarState extends State<ArduinoCar> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -77,15 +71,15 @@ class _ArduinoCarState extends State<ArduinoCar> {
                   child: Center(
                     child: Column(
                       children: <Widget>[
-                        createPadBtn(1, widthBtn, heightBtn, 2),
+                        CreatePadBtn(1, widthBtn, heightBtn, 2),
                         Row(children: <Widget>[
-                          createPadBtn(2, widthBtn, heightBtn, 2),
+                          CreatePadBtn(2, widthBtn, heightBtn, 2),
                           SizedBox(
                             width: widthBtn,
                           ),
-                          createPadBtn(3, widthBtn, heightBtn, 2),
+                          CreatePadBtn(3, widthBtn, heightBtn, 2),
                         ]),
-                        createPadBtn(4, widthBtn, heightBtn, 2),
+                        CreatePadBtn(4, widthBtn, heightBtn, 2),
                       ],
                     ),
                   ),
@@ -155,7 +149,9 @@ class _ArduinoCarState extends State<ArduinoCar> {
                 )
               ],
             ),
-            SizedBox(height: 30,)
+            SizedBox(
+              height: 30,
+            )
           ],
         ),
       ),

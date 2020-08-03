@@ -264,6 +264,7 @@ public final class R {
   }
   public static final class mipmap {
     public static final int ic_launcher=0x7f080000;
+    public static final int launcher_icon=0x7f080001;
   }
   public static final class string {
     public static final int status_bar_notification_info_overflow=0x7f090000;

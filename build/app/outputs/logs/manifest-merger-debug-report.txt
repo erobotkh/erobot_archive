@@ -47,7 +47,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/thea/
 	android:label
 		ADDED from /home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:10:9-35
 	android:icon
-		ADDED from /home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:11:9-43
+		ADDED from /home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:11:9-45
 	android:name
 		ADDED from /home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:9:9-57
 activity#com.example.erobot_app.MainActivity

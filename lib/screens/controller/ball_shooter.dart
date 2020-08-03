@@ -21,12 +21,8 @@ class BallShooter extends StatefulWidget {
 class _BallShooterState extends State<BallShooter> {
   @override
   dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     super.dispose();
   }
 
@@ -39,8 +35,6 @@ class _BallShooterState extends State<BallShooter> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -84,15 +78,15 @@ class _BallShooterState extends State<BallShooter> {
                   child: Center(
                     child: Column(
                       children: <Widget>[
-                        createPadBtn(1, widthBtn, heightBtn, 1),
+                        CreatePadBtn(1, widthBtn, heightBtn, 1),
                         Row(children: <Widget>[
-                          createPadBtn(2, widthBtn, heightBtn, 1),
+                          CreatePadBtn(2, widthBtn, heightBtn, 1),
                           SizedBox(
                             width: widthBtn,
                           ),
-                          createPadBtn(3, widthBtn, heightBtn, 1),
+                          CreatePadBtn(3, widthBtn, heightBtn, 1),
                         ]),
-                        createPadBtn(4, widthBtn, heightBtn, 1),
+                        CreatePadBtn(4, widthBtn, heightBtn, 1),
                       ],
                     ),
                   ),
@@ -219,4 +213,3 @@ class _BallShooterState extends State<BallShooter> {
     );
   }
 }
-
