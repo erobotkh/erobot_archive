@@ -213,7 +213,7 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
 
   void handleTabChange() {
     setState(() {
-      tabIndex == 0 ? tabIndex = 1 : tabIndex = 0;
+      tabIndex =_tabController.index;
     });
     print('Tab Change $tabIndex');
   }
