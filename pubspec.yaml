@@ -91,6 +91,11 @@ flutter:
         - asset: fonts/Quicksand-Bold.ttf
         - asset: fonts/Quicksand-Medium.ttf
           weight: 700
+    - family: Hanuman
+      fonts:
+        - asset: fonts/khmer/Hanuman-Regular.ttf
+        - asset: fonts/khmer/Hanuman-Bold.ttf
+          weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -44,10 +44,17 @@ MaterialColor colorCustom = MaterialColor(0xFF172634, color);
 MaterialColor colorCustom2 = MaterialColor(0xFF161F28, color);
 
 void main() => runApp(MaterialApp(
-      theme: ThemeData(
-        primarySwatch: colorCustom,
-        canvasColor: colorCustom2,
-      ),
+      builder: (context, navigator) {
+        var lang = Localizations.localeOf(context).languageCode;
+        return Theme(
+          data: ThemeData(
+            fontFamily: lang == 'kh' ? 'Hanuman' : 'Raleway',
+            primarySwatch: colorCustom,
+            canvasColor: colorCustom2,
+          ),
+          child: navigator,
+        );
+      },
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
@@ -120,7 +127,6 @@ class _SplashScreenState extends State<SplashScreen> {
                     RichText(
                       text: TextSpan(
                           style: TextStyle(
-                            fontFamily: 'Raleway',
                             color: Color.fromRGBO(22, 31, 40, 1),
                             fontWeight: FontWeight.w300,
                             fontSize: 15,
@@ -174,6 +180,7 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
   PreloadPageController _pageController;
   MenuPositionController _menuPositionController;
   TabController _tabController;
+  ScrollController _scrollViewController;
 
   @override
   void initState() {
@@ -188,7 +195,18 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
     _tabController =
         TabController(length: 2, vsync: this, initialIndex: tabIndex);
     _tabController.addListener(handleTabChange);
+
+    _scrollViewController = ScrollController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollViewController.dispose();
+    _tabController.dispose();
+    _pageController.dispose();
+    _menuPositionController.dispose();
+    super.dispose();
   }
 
   List<String> titleName = ['E-Robot', 'Education', 'About Us', 'Profile'];
@@ -223,10 +241,8 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
                     color: Hexcolor('172634'),
                     blurRadius: 30.0, // soften the shadow
                     spreadRadius: 0.0, //extend the shadow
-                    offset: Offset(
-                      0.0, // Move to right 10  horizontally
-                      0.0, // Move to bottom 10 Vertically
-                    ),
+                    offset: Offset(0.0, 0.0),
+                    // Move to (right horizontally, bottom vertically)
                   )
                 ],
               ),
@@ -269,12 +285,12 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
                   print('Swaping on tab[1]');
                   _pageController.animateToPage(3,
                       curve: Curves.easeInOut,
-                      duration: Duration(milliseconds: 200));
+                      duration: Duration(milliseconds: 250));
                 } else if (overscroll.overscroll < -25 && tabIndex == 0) {
                   print('Swapping on tab[0]');
                   _pageController.animateToPage(1,
                       curve: Curves.easeInOut,
-                      duration: Duration(milliseconds: 200));
+                      duration: Duration(milliseconds: 250));
                 }
               }
               return true;
@@ -445,7 +461,7 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
   Future<bool> _onBackPressed() {
     return showDialog(
           context: context,
-          builder: (context) => new AlertDialog(
+          builder: (context) => AlertDialog(
             backgroundColor: Color(0xFF161F28),
             title: Text(
               'Are you sure?',

@@ -9,8 +9,8 @@ class AboutMember extends StatelessWidget {
         body: ListView(
       //Store all cards
       children: <Widget>[
-        buildProfileCard(
-            'Suy Kosal', 'Leader of Team', 'kosal.png', 'kosal', 'kosal', context),
+        buildProfileCard('Suy Kosal', 'Leader of Team', 'kosal.png', 'kosal',
+            'kosal', context),
         buildProfileCard('Han Leangsiv', 'Organizer of team since 2019',
             'leangsiv.png', 'kosal', 'kosal', context),
         buildProfileCard('Run Seyha', 'Organizer of team since 2019',
@@ -60,16 +60,12 @@ class AboutMember extends StatelessWidget {
                           Text(
                             name,
                             style: TextStyle(
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18),
+                                fontWeight: FontWeight.w500, fontSize: 18),
                           ),
                           Text(
                             role,
                             style: TextStyle(
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12),
+                                fontWeight: FontWeight.w500, fontSize: 12),
                           ),
                         ]),
                     Container(
@@ -120,7 +116,6 @@ class AboutMember extends StatelessWidget {
                                 label: Text(
                                   'Facebook',
                                   style: TextStyle(
-                                      fontFamily: 'Raleway',
                                       fontWeight: FontWeight.w500,
                                       fontSize: 12,
                                       color: Colors.white),

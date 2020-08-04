@@ -60,16 +60,12 @@ class _TeamReputationState extends State<TeamReputation> {
                           Text(
                             name,
                             style: TextStyle(
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18),
+                                fontWeight: FontWeight.w500, fontSize: 18),
                           ),
                           Text(
                             role,
                             style: TextStyle(
-                                fontFamily: 'Raleway',
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12),
+                                fontWeight: FontWeight.w500, fontSize: 12),
                           ),
                         ]),
                     Container(
@@ -81,18 +77,25 @@ class _TeamReputationState extends State<TeamReputation> {
                           Container(
                             height: 28,
                             child: FlatButton(
-                                splashColor: index == 1 ? Colors.lightBlue : index == 2 ? Colors.green : Colors.lightBlueAccent,
+                                splashColor: index == 1
+                                    ? Colors.lightBlue
+                                    : index == 2
+                                        ? Colors.green
+                                        : Colors.lightBlueAccent,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50)),
                                 color: Hexcolor('161F28'),
                                 onPressed: () {
-                                  print('see more clicked');
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => AboutTeamTemplate(index)));
+                                  print('see more clicked $index');
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              AboutTeamTemplate(index)));
                                 },
                                 child: Text(
                                   'Read More',
                                   style: TextStyle(
-                                      fontFamily: 'Raleway',
                                       fontWeight: FontWeight.w500,
                                       fontSize: 12,
                                       color: Colors.white),
