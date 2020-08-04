@@ -284,12 +284,12 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
                 } else if (overscroll.overscroll > 25 && tabIndex == 1) {
                   print('Swaping on tab[1]');
                   _pageController.animateToPage(3,
-                      curve: Curves.easeInOut,
+                      curve: Curves.easeOutQuad,
                       duration: Duration(milliseconds: 250));
                 } else if (overscroll.overscroll < -25 && tabIndex == 0) {
                   print('Swapping on tab[0]');
                   _pageController.animateToPage(1,
-                      curve: Curves.easeInOut,
+                      curve: Curves.easeOutQuad,
                       duration: Duration(milliseconds: 250));
                 }
               }
