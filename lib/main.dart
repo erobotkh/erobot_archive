@@ -166,29 +166,50 @@ class Root extends StatefulWidget {
   _RootState createState() => _RootState();
 }
 
-class _RootState extends State<Root> {
+class _RootState extends State<Root> with SingleTickerProviderStateMixin {
   int pageIndex = 0;
-  static PreloadPageController _pageController;
-  MenuPositionController _menuPositionController;
+  int tabIndex = 0;
   bool userPageDragging = false;
+
+  //Controller
+  PreloadPageController _pageController;
+  MenuPositionController _menuPositionController;
+  TabController _tabController;
 
   @override
   void initState() {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
     _menuPositionController = MenuPositionController(initPosition: 0);
     _pageController = PreloadPageController(
         initialPage: pageIndex, keepPage: true, viewportFraction: 1);
     _pageController.addListener(handlePageChange);
+
+    _tabController =
+        TabController(length: 2, vsync: this, initialIndex: tabIndex);
+    _tabController.addListener(handleTabChange);
     super.initState();
   }
 
   List<String> titleName = ['E-Robot', 'Education', 'About Us', 'Profile'];
-  var _pages = [
-    HomeScreen(),
-    ArduinoDoc(),
-    DefaultTabController(
-        //About Us
+
+  void handleTabChange() {
+    setState(() {
+      tabIndex == 0 ? tabIndex = 1 : tabIndex = 0;
+    });
+    print('Tab Change $tabIndex');
+  }
+
+  void handlePageChange() {
+    _menuPositionController.absolutePosition = _pageController.page;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var aboutUs = DefaultTabController(
+        //About us tab
+        initialIndex: 0,
         length: 2,
         child: Scaffold(
           backgroundColor: Hexcolor('172634'),
@@ -196,6 +217,8 @@ class _RootState extends State<Root> {
             automaticallyImplyLeading: false, //ensure that no back btn
             elevation: 5,
             title: TabBar(
+              controller: _tabController,
+              isScrollable: true,
               dragStartBehavior: DragStartBehavior.start,
               labelStyle: TextStyle(
                   fontFamily: 'Raleway',
@@ -210,30 +233,38 @@ class _RootState extends State<Root> {
           ),
           body: NotificationListener(
             onNotification: (overscroll) {
-              if (overscroll is OverscrollNotification &&
+              if (overscroll is UserScrollNotification &&
+                  (overscroll.direction == ScrollDirection.forward ||
+                      overscroll.direction == ScrollDirection.reverse)) {
+                print('scrolling');
+              } else if (overscroll is OverscrollNotification &&
                   overscroll.overscroll != 0 &&
                   overscroll.dragDetails != null) {
-                _pageController.animateToPage(overscroll.overscroll < 0 ? 1 : 3,
-                    curve: Curves.easeInOut,
-                    duration: Duration(milliseconds: 400));
+                print(overscroll.overscroll);
+                if (overscroll.overscroll > 25 && tabIndex == 0) {
+                  print('Scrolling on tab[0]');
+                } else if (overscroll.overscroll > 25 && tabIndex == 1) {
+                  print('Swaping on tab[1]');
+                  _pageController.animateToPage(3,
+                      curve: Curves.easeInOut,
+                      duration: Duration(milliseconds: 250));
+                } else if (overscroll.overscroll < -25 && tabIndex == 0) {
+                  print('Swapping on tab[0]');
+                  _pageController.animateToPage(1,
+                      curve: Curves.easeInOut,
+                      duration: Duration(milliseconds: 250));
+                }
               }
               return true;
             },
-            child: TabBarView(children: [
+            child: TabBarView(controller: _tabController, children: [
               AboutMember(),
               TeamReputation(),
             ]),
           ),
-        )),
-    LogInChoice()
-  ];
+        ));
 
-  void handlePageChange() {
-    _menuPositionController.absolutePosition = _pageController.page;
-  }
-
-  @override
-  Widget build(BuildContext context) {
+    //Root
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
@@ -260,7 +291,12 @@ class _RootState extends State<Root> {
         drawer: MainDrawer(),
         body: Container(
           child: PreloadPageView(
-            children: _pages,
+            children: <Widget>[
+              HomeScreen(),
+              ArduinoDoc(),
+              aboutUs,
+              LogInChoice()
+            ],
             physics: const AlwaysScrollableScrollPhysics(),
             onPageChanged: (index) {
               setState(() {
@@ -279,7 +315,7 @@ class _RootState extends State<Root> {
           itemMargin: EdgeInsets.symmetric(horizontal: 0),
           iconRightMargin: 10,
           onTap: (_index) async {
-            var duration = 300;
+            var duration = 250;
             if (_index == 3 && pageIndex == 0) {
               await _pageController.animateToPage(2,
                   curve: Curves.easeInOut,
