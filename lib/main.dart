@@ -18,7 +18,6 @@ import 'package:erobot_app/screens/controller/ball_shooter.dart';
 import 'package:erobot_app/screens/controller/arduino_car.dart';
 import 'package:erobot_app/screens/ir_remoter/ir_remoter.dart';
 import 'package:erobot_app/screens/home_page/home.dart';
-//import 'package:erobot_app/screens/aboutus/aboutus.dart';
 import 'package:erobot_app/screens/drawer_bar/feedback.dart';
 import 'package:erobot_app/screens/login_page/log_choice.dart';
 import 'package:erobot_app/screens/login_page/login.dart';
@@ -207,28 +206,51 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    var aboutUs = DefaultTabController(
-        //About us tab
+    DefaultTabController aboutUs = DefaultTabController(
+        //ABOUT US
         initialIndex: 0,
         length: 2,
         child: Scaffold(
           backgroundColor: Hexcolor('172634'),
-          appBar: AppBar(
-            automaticallyImplyLeading: false, //ensure that no back btn
-            elevation: 5,
-            title: TabBar(
-              controller: _tabController,
-              isScrollable: true,
-              dragStartBehavior: DragStartBehavior.start,
-              labelStyle: TextStyle(
-                  fontFamily: 'Raleway',
-                  fontWeight: FontWeight.w500,
-                  fontSize: 15),
-              indicatorColor: Colors.white,
-              tabs: <Widget>[
-                Tab(text: 'About Member'),
-                Tab(text: 'Team Reputation')
-              ],
+          //Centering the tab bar
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(
+                kToolbarHeight), //kToolbarHeight has same constant that AppBar uses.
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Hexcolor('172634'),
+                    blurRadius: 30.0, // soften the shadow
+                    spreadRadius: 0.0, //extend the shadow
+                    offset: Offset(
+                      0.0, // Move to right 10  horizontally
+                      0.0, // Move to bottom 10 Vertically
+                    ),
+                  )
+                ],
+              ),
+              child: SafeArea(
+                child: Column(
+                  children: <Widget>[
+                    Expanded(child: Container()),
+                    TabBar(
+                      controller: _tabController,
+                      isScrollable: true,
+                      dragStartBehavior: DragStartBehavior.start,
+                      labelStyle: TextStyle(
+                          fontFamily: 'Raleway',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15),
+                      indicatorColor: Colors.white,
+                      tabs: <Widget>[
+                        Tab(text: 'About Member'),
+                        Tab(text: 'Team Reputation')
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
           body: NotificationListener(
@@ -247,12 +269,12 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
                   print('Swaping on tab[1]');
                   _pageController.animateToPage(3,
                       curve: Curves.easeInOut,
-                      duration: Duration(milliseconds: 250));
+                      duration: Duration(milliseconds: 200));
                 } else if (overscroll.overscroll < -25 && tabIndex == 0) {
                   print('Swapping on tab[0]');
                   _pageController.animateToPage(1,
                       curve: Curves.easeInOut,
-                      duration: Duration(milliseconds: 250));
+                      duration: Duration(milliseconds: 200));
                 }
               }
               return true;
@@ -264,7 +286,7 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
           ),
         ));
 
-    //Root
+    //ROOT PAGE
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(

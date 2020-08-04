@@ -30,8 +30,8 @@
 25        android:debuggable="true"
 26        android:icon="@mipmap/launcher_icon"
 26-->/home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:11:9-45
-27        android:label="erobot_app" >
-27-->/home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:10:9-35
+27        android:label="Erobot" >
+27-->/home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:10:9-31
 28        <activity
 28-->/home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:12:9-40:20
 29            android:name="com.example.erobot_app.MainActivity"

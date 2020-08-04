@@ -74,6 +74,12 @@
       "languageVersion": "2.2"
     },
     {
+      "name": "flutter_launcher_name",
+      "rootUri": "file:///home/thea/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_launcher_name-0.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
       "name": "flutter_staggered_grid_view",
       "rootUri": "file:///home/thea/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_staggered_grid_view-0.3.1",
       "packageUri": "lib/",
@@ -224,7 +230,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-08-03T08:01:53.855461Z",
+  "generated": "2020-08-04T03:22:06.607646Z",
   "generator": "pub",
   "generatorVersion": "2.8.4"
 }

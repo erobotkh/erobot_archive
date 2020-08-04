@@ -18,7 +18,7 @@
         android:name="io.flutter.app.FlutterApplication"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:icon="@mipmap/launcher_icon"
-        android:label="erobot_app" >
+        android:label="Erobot" >
         <activity
             android:name="com.example.erobot_app.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
