@@ -93,7 +93,6 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
                                     width: 10,
                                   ),
                                   Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Column(
                                           //Store name and role
@@ -138,86 +137,89 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
               ),
             ];
           },
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                //Section1 - Memories
-                Text(
-                  '   ' + 'Memories',
-                  style: TextStyle(
-                      color: Hexcolor('172634'),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18),
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.20,
-                  child: buildListView(0.55, 1),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15, right: 15, top: 5, bottom: 5),
-                  child: Text(paragraph1),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
+          body: ScrollConfiguration(
+          behavior: ScrollBehavior()..buildViewportChrome(context, null, AxisDirection.down),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  //Section1 - Memories
+                  Text(
+                    '   ' + 'Memories',
+                    style: TextStyle(
+                        color: Hexcolor('172634'),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18),
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.20,
+                    child: buildListView(0.55, 1),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 15, right: 15, top: 5, bottom: 5),
+                    child: Text(paragraph1),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
 
-                //Section2 - Participating Members
-                Text(
-                  '   ' + 'Participating Members',
-                  style: TextStyle(
-                      color: Hexcolor('172634'),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18),
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.20,
-                  child: buildListView(0.35, 2),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                //Section3 - Robots used
-                Text(
-                  '   ' + 'Robots used at the Event',
-                  style: TextStyle(
-                      color: Hexcolor('172634'),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18),
-                ),
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.20,
-                  child: buildListView(0.35, 3),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15, right: 15, top: 5, bottom: 5),
-                  child: Text(paragraph2),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                RichText(
-                  text: TextSpan(
-                      style: TextStyle(
-                        fontFamily: 'Raleway',
-                        color: Color.fromRGBO(22, 31, 40, 1),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 15,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(text: '    '),
-                        TextSpan(text: 'Written by '),
-                        TextSpan(
-                            text: 'Suy Kosal',
-                            style: TextStyle(color: Hexcolor('03a0b0'))),
-                      ]),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
+                  //Section2 - Participating Members
+                  Text(
+                    '   ' + 'Participating Members',
+                    style: TextStyle(
+                        color: Hexcolor('172634'),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18),
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.20,
+                    child: buildListView(0.35, 2),
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  //Section3 - Robots used
+                  Text(
+                    '   ' + 'Robots used at the Event',
+                    style: TextStyle(
+                        color: Hexcolor('172634'),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18),
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.20,
+                    child: buildListView(0.35, 3),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 15, right: 15, top: 5, bottom: 5),
+                    child: Text(paragraph2),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                        style: TextStyle(
+                          fontFamily: 'Raleway',
+                          color: Color.fromRGBO(22, 31, 40, 1),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 15,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(text: '    '),
+                          TextSpan(text: 'Written by '),
+                          TextSpan(
+                              text: 'Suy Kosal',
+                              style: TextStyle(color: Hexcolor('03a0b0'))),
+                        ]),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
             ),
           ),
         ));
@@ -238,7 +240,9 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
                       padding: const EdgeInsets.only(top: 5),
                       child: Text(
                         ' ' +
-                            (section == 2 ? names[index] : robotNames[index]) +
+                            (section == 2
+                                ? names[index]
+                                : robotNames[index]) +
                             ' ',
                         style: TextStyle(
                             backgroundColor: Hexcolor('03a0b0'),
