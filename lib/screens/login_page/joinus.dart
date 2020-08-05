@@ -1,10 +1,23 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:erobot_app/validation/validation.dart';
 import 'package:erobot_app/object_class/classes.dart';
+import 'package:file_picker/file_picker.dart';
 
-class JoinUs extends StatelessWidget {
+class JoinUs extends StatefulWidget {
+  @override
+  _JoinUsState createState() => _JoinUsState();
+}
+
+class _JoinUsState extends State<JoinUs> {
   final _formKey = GlobalKey<FormState>();
+  var filepath = '0';
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,76 +54,109 @@ class JoinUs extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 15),
-            CircleAvatar(
-              backgroundColor: Hexcolor('03a0b0'),
-              radius: 55,
-              child: CircleAvatar(
-                backgroundColor: Colors.white,
-                radius: 50,
-                backgroundImage: AssetImage('assets/blank-profile-picture.png'),
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.55,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8)),
+                        padding: EdgeInsets.only(bottom: 5),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              labelText: "First Name",
+                              labelStyle: TextStyle(
+                                  color: Color.fromRGBO(0, 0, 0, 0.6)),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(10, 5, 20, 0)),
+                          validator: (val) {
+                            RequestMember.firstName = val;
+                            if (val.isEmpty)
+                              return 'Enter your first name';
+                            else
+                              return null;
+                          },
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.55,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8)),
+                        padding: EdgeInsets.only(bottom: 5),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              labelText: 'Last name',
+                              labelStyle: TextStyle(
+                                  color: Color.fromRGBO(0, 0, 0, 0.6)),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(10, 5, 20, 0)),
+                          validator: (val) {
+                            RequestMember.lastName = val;
+                            if (val.isEmpty)
+                              return 'Enter your last name';
+                            else
+                              return null;
+                          },
+                          keyboardType: TextInputType.text,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Hexcolor('03a0b0'),
+                    radius: 55,
+                    child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 50,
+                        backgroundImage: FileImage(File(filepath)),
+                        child: GestureDetector(
+                          onTap: () async {
+                            filepath = await FilePicker.getFilePath(
+                                type: FileType.image);
+                            setState(() {});
+                            print(filepath);
+                          },
+                          child: filepath == '0'
+                              ? CircleAvatar(
+                                  radius: 55,
+                                  backgroundColor:
+                                      Color.fromRGBO(255, 255, 255, .5),
+                                  child: Icon(
+                                    Icons.camera_alt,
+                                    color: Hexcolor('03a0b0'),
+                                    size: 35,
+                                  ),
+                                )
+                              : null,
+                        )),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: 0),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: Form(
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.442,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8)),
-                          padding: EdgeInsets.only(bottom: 5),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                labelText: "First Name",
-                                labelStyle: TextStyle(
-                                    color: Color.fromRGBO(0, 0, 0, 0.6)),
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(10, 5, 20, 0)),
-                            validator: (val) {
-                              RequestMember.firstName = val;
-                              if (val.isEmpty)
-                                return 'Enter your first name';
-                              else
-                                return null;
-                            },
-                            keyboardType: TextInputType.text,
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.442,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8)),
-                          padding: EdgeInsets.only(bottom: 5),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                labelText: 'Last name',
-                                labelStyle: TextStyle(
-                                    color: Color.fromRGBO(0, 0, 0, 0.6)),
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(10, 5, 20, 0)),
-                            validator: (val) {
-                              RequestMember.lastName = val;
-                              if (val.isEmpty)
-                                return 'Enter your last name';
-                              else
-                                return null;
-                            },
-                            keyboardType: TextInputType.text,
-                          ),
-                        ),
-                      ],
-                    ),
                     SizedBox(height: 10),
                     Container(
                       decoration: BoxDecoration(
