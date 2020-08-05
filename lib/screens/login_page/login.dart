@@ -24,7 +24,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(title: Text('Login')),
+      appBar: AppBar(
+          title: Text(
+        'Login',
+        style: TextStyle(fontSize: 18),
+      )),
       body: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,15 +36,16 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               padding: const EdgeInsets.only(left: 18, right: 18, top: 18),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Login',
+                    ' Welcome back mate!',
                     style: TextStyle(
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 25,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                   Form(
                       key: _formKey,
@@ -54,14 +59,15 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            padding: EdgeInsets.only(bottom: 10),
+                            padding: EdgeInsets.only(bottom: 5),
                             child: TextFormField(
                               decoration: InputDecoration(
+                                border: InputBorder.none,
                                 labelText: "Enter your email address",
                                 labelStyle: TextStyle(
                                     color: Color.fromRGBO(0, 0, 0, 0.6)),
                                 contentPadding:
-                                    EdgeInsets.fromLTRB(10, 5, 20, 10),
+                                    EdgeInsets.fromLTRB(10, 5, 20, 0),
                               ),
                               validator: (val) {
                                 _email = val;
@@ -78,17 +84,18 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(5),
                             ),
-                            padding: EdgeInsets.only(bottom: 10),
+                            padding: EdgeInsets.only(bottom: 5),
                             child: Column(
                               children: <Widget>[
                                 TextFormField(
                                   decoration: InputDecoration(
+                                    border: InputBorder.none,
                                     isDense: false,
                                     labelText: "Enter your password",
                                     labelStyle: TextStyle(
                                         color: Color.fromRGBO(0, 0, 0, 0.6)),
                                     contentPadding:
-                                        EdgeInsets.fromLTRB(10, 5, 0, 10),
+                                        EdgeInsets.fromLTRB(10, 5, 20, 0),
                                     suffixIcon: Padding(
                                       padding: const EdgeInsets.only(right: 5),
                                       child: IconButton(
@@ -116,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
                   Center(
                     child: Container(
                       height: 50,
-                      width: MediaQuery.of(context).size.width * 0.40,
+                      width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Hexcolor('03a0b0')),
@@ -127,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Center(
                           child: Text(
                             'Login',
-                            style: TextStyle(color: Colors.white, fontSize: 15),
+                            style: TextStyle(color: Colors.white, fontSize: 18),
                           ),
                         ),
                         onPressed: () {

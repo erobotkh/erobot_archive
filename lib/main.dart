@@ -56,6 +56,10 @@ void main() => runApp(MaterialApp(
           child: navigator,
         );
       },
+      theme: ThemeData(
+        primarySwatch: colorCustom,
+        canvasColor: colorCustom2,
+      ),
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
@@ -105,6 +109,7 @@ class _SplashScreenState extends State<SplashScreen> {
       DeviceOrientation.portraitDown,
     ]);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
           color: Colors.white,
@@ -284,7 +289,7 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
                 print(overscroll.overscroll);
                 if (overscroll.overscroll > 25 && tabIndex == 0) {
                   print('Scrolling on tab[0]');
-                } else if (overscroll.overscroll > 25 && tabIndex == 1) {
+                } else if (overscroll.overscroll > 20 && tabIndex == 1) {
                   print('Swaping on tab[1]');
                   _pageController.animateToPage(3,
                       curve: Curves.easeOutQuad,
@@ -306,156 +311,161 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
         ));
 
     //ROOT PAGE
-    return WillPopScope(
-      onWillPop: _onBackPressed,
-      child: Scaffold(
-        appBar: AppBar(
-          elevation: pageIndex == 2 ? 0 : 5,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 13),
-            child: Builder(
-                builder: (context) => IconButton(
-                    icon: FaIcon(
-                      FontAwesomeIcons.alignLeft,
-                      size: 20,
-                    ),
-                    onPressed: () => Scaffold.of(context).openDrawer())),
+    return ScrollConfiguration(
+      behavior: ScrollBehavior()
+        ..buildViewportChrome(context, null, AxisDirection.down),
+      child: WillPopScope(
+        onWillPop: _onBackPressed,
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(
+            elevation: pageIndex == 2 ? 0 : 5,
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 13),
+              child: Builder(
+                  builder: (context) => IconButton(
+                      icon: FaIcon(
+                        FontAwesomeIcons.alignLeft,
+                        size: 20,
+                      ),
+                      onPressed: () => Scaffold.of(context).openDrawer())),
+            ),
+            title: Text(
+              titleName[pageIndex],
+              style: TextStyle(
+                  fontFamily: 'Raleway',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18),
+            ),
           ),
-          title: Text(
-            titleName[pageIndex],
-            style: TextStyle(
-                fontFamily: 'Raleway',
-                fontWeight: FontWeight.w500,
-                fontSize: 18),
+          drawer: MainDrawer(),
+          body: Container(
+            child: PreloadPageView(
+              children: <Widget>[
+                HomeScreen(),
+                ArduinoDoc(),
+                aboutUs,
+                LogInChoice()
+              ],
+              physics: const AlwaysScrollableScrollPhysics(),
+              onPageChanged: (index) {
+                setState(() {
+                  pageIndex = index;
+                });
+              },
+              preloadPagesCount: 4,
+              controller: _pageController,
+            ),
           ),
-        ),
-        drawer: MainDrawer(),
-        body: Container(
-          child: PreloadPageView(
-            children: <Widget>[
-              HomeScreen(),
-              ArduinoDoc(),
-              aboutUs,
-              LogInChoice()
-            ],
-            physics: const AlwaysScrollableScrollPhysics(),
-            onPageChanged: (index) {
-              setState(() {
-                pageIndex = index;
-              });
+          bottomNavigationBar: BubbledNavigationBar(
+            defaultBubbleColor: Colors.white,
+            backgroundColor: Hexcolor('172634'),
+            initialIndex: pageIndex,
+            controller: _menuPositionController,
+            itemMargin: EdgeInsets.symmetric(horizontal: 0),
+            iconRightMargin: 10,
+            onTap: (_index) async {
+              var duration = 250;
+              if (_index == 3 && pageIndex == 0) {
+                await _pageController.animateToPage(2,
+                    curve: Curves.easeInOut,
+                    duration: Duration(milliseconds: duration));
+                _pageController.animateToPage(3,
+                    curve: Curves.easeInOut,
+                    duration: Duration(milliseconds: duration + 100));
+              }
+              if (_index == 0 && pageIndex == 3) {
+                await _pageController.animateToPage(1,
+                    curve: Curves.easeInOut,
+                    duration: Duration(milliseconds: duration));
+                _pageController.animateToPage(0,
+                    curve: Curves.easeInOut,
+                    duration: Duration(milliseconds: duration + 100));
+              }
+              if ((_index - pageIndex) == 2 || (pageIndex - _index) == 2) {
+                int _indexR;
+                if (_index > pageIndex)
+                  _indexR = pageIndex;
+                else
+                  _indexR = _index;
+                await _pageController.animateToPage(_indexR + 1,
+                    curve: Curves.easeInOut,
+                    duration: Duration(milliseconds: duration));
+                _pageController.animateToPage(_index,
+                    curve: Curves.easeInOut,
+                    duration: Duration(milliseconds: duration + 100));
+              } else {
+                _pageController.animateToPage(_index,
+                    curve: Curves.easeInOut,
+                    duration: Duration(milliseconds: duration + 100));
+              }
             },
-            preloadPagesCount: 4,
-            controller: _pageController,
+            items: <BubbledNavigationBarItem>[
+              BubbledNavigationBarItem(
+                icon: Icon(Icons.home, size: 30, color: Colors.white),
+                activeIcon: Icon(
+                  Icons.home,
+                  size: 30,
+                  color: Hexcolor('172634'),
+                ),
+                title: Text(
+                  'Home',
+                  style: TextStyle(color: Hexcolor('172634'), fontSize: 12),
+                ),
+              ),
+              BubbledNavigationBarItem(
+                icon: Icon(Icons.school, size: 30, color: Colors.white),
+                activeIcon: Icon(
+                  Icons.school,
+                  size: 30,
+                  color: Hexcolor('172634'),
+                ),
+                title: Text(
+                  'Education',
+                  style: TextStyle(
+                      color: Hexcolor('172634'),
+                      fontFamily: 'Raleway',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w300,
+                      letterSpacing: .5),
+                ),
+              ),
+              BubbledNavigationBarItem(
+                icon: Icon(Icons.people, size: 30, color: Colors.white),
+                activeIcon: Icon(
+                  Icons.people,
+                  size: 30,
+                  color: Hexcolor('172634'),
+                ),
+                title: Text(
+                  'About us',
+                  style: TextStyle(
+                      color: Hexcolor('172634'),
+                      fontFamily: 'Raleway',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w300,
+                      letterSpacing: .5),
+                ),
+              ),
+              BubbledNavigationBarItem(
+                icon: Icon(Icons.person, size: 30, color: Colors.white),
+                activeIcon: Icon(
+                  Icons.person,
+                  size: 30,
+                  color: Hexcolor('172634'),
+                ),
+                title: Text(
+                  'Profile',
+                  style: TextStyle(
+                      color: Hexcolor('172634'),
+                      fontFamily: 'Raleway',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w300,
+                      letterSpacing: .5),
+                ),
+              ),
+            ],
           ),
-        ),
-        bottomNavigationBar: BubbledNavigationBar(
-          defaultBubbleColor: Colors.white,
-          backgroundColor: Hexcolor('172634'),
-          initialIndex: pageIndex,
-          controller: _menuPositionController,
-          itemMargin: EdgeInsets.symmetric(horizontal: 0),
-          iconRightMargin: 10,
-          onTap: (_index) async {
-            var duration = 250;
-            if (_index == 3 && pageIndex == 0) {
-              await _pageController.animateToPage(2,
-                  curve: Curves.easeInOut,
-                  duration: Duration(milliseconds: duration));
-              _pageController.animateToPage(3,
-                  curve: Curves.easeInOut,
-                  duration: Duration(milliseconds: duration + 100));
-            }
-            if (_index == 0 && pageIndex == 3) {
-              await _pageController.animateToPage(1,
-                  curve: Curves.easeInOut,
-                  duration: Duration(milliseconds: duration));
-              _pageController.animateToPage(0,
-                  curve: Curves.easeInOut,
-                  duration: Duration(milliseconds: duration + 100));
-            }
-            if ((_index - pageIndex) == 2 || (pageIndex - _index) == 2) {
-              int _indexR;
-              if (_index > pageIndex)
-                _indexR = pageIndex;
-              else
-                _indexR = _index;
-              await _pageController.animateToPage(_indexR + 1,
-                  curve: Curves.easeInOut,
-                  duration: Duration(milliseconds: duration));
-              _pageController.animateToPage(_index,
-                  curve: Curves.easeInOut,
-                  duration: Duration(milliseconds: duration + 100));
-            } else {
-              _pageController.animateToPage(_index,
-                  curve: Curves.easeInOut,
-                  duration: Duration(milliseconds: duration + 100));
-            }
-          },
-          items: <BubbledNavigationBarItem>[
-            BubbledNavigationBarItem(
-              icon: Icon(Icons.home, size: 30, color: Colors.white),
-              activeIcon: Icon(
-                Icons.home,
-                size: 30,
-                color: Hexcolor('172634'),
-              ),
-              title: Text(
-                'Home',
-                style: TextStyle(color: Hexcolor('172634'), fontSize: 12),
-              ),
-            ),
-            BubbledNavigationBarItem(
-              icon: Icon(Icons.school, size: 30, color: Colors.white),
-              activeIcon: Icon(
-                Icons.school,
-                size: 30,
-                color: Hexcolor('172634'),
-              ),
-              title: Text(
-                'Education',
-                style: TextStyle(
-                    color: Hexcolor('172634'),
-                    fontFamily: 'Raleway',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w300,
-                    letterSpacing: .5),
-              ),
-            ),
-            BubbledNavigationBarItem(
-              icon: Icon(Icons.people, size: 30, color: Colors.white),
-              activeIcon: Icon(
-                Icons.people,
-                size: 30,
-                color: Hexcolor('172634'),
-              ),
-              title: Text(
-                'About us',
-                style: TextStyle(
-                    color: Hexcolor('172634'),
-                    fontFamily: 'Raleway',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w300,
-                    letterSpacing: .5),
-              ),
-            ),
-            BubbledNavigationBarItem(
-              icon: Icon(Icons.person, size: 30, color: Colors.white),
-              activeIcon: Icon(
-                Icons.person,
-                size: 30,
-                color: Hexcolor('172634'),
-              ),
-              title: Text(
-                'Profile',
-                style: TextStyle(
-                    color: Hexcolor('172634'),
-                    fontFamily: 'Raleway',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w300,
-                    letterSpacing: .5),
-              ),
-            ),
-          ],
         ),
       ),
     );

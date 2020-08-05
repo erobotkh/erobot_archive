@@ -8,7 +8,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: StaggeredGridView.count(
+        physics: const NeverScrollableScrollPhysics(),
         crossAxisCount: 2,
         crossAxisSpacing: 3,
         mainAxisSpacing: 3,
@@ -23,8 +25,8 @@ class HomeScreen extends StatelessWidget {
               context),
           buildBtn('Arduino Car', 'Remoter to Control Arduino Car with speed',
               3, context),
-          buildBtn(
-              'IR Remoter', 'to Control Light and Buzzer Arduino', 4, context),
+          buildBtn('IR Remoter', 'to Control Light and Buzzer Arduino', 4,
+              context),
         ],
         staggeredTiles: [
           StaggeredTile.extent(2, 150),

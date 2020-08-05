@@ -13,6 +13,7 @@ class _LogInChoiceState extends State<LogInChoice> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
         padding: const EdgeInsets.only(left: 18, right: 18),
         child: Column(
@@ -99,7 +100,7 @@ class _LogInChoiceState extends State<LogInChoice> {
                   child: Center(
                       child: Text(
                     'Login as member',
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    style: TextStyle(fontSize: 18, color: Colors.white),
                   ))),
             ),
             SizedBox(
@@ -119,7 +120,7 @@ class _LogInChoiceState extends State<LogInChoice> {
                   child: Center(
                       child: Text(
                     'Join Us',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 18),
                   ))),
             )
           ],
