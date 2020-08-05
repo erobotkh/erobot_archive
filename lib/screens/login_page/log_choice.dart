@@ -58,7 +58,7 @@ class _LogInChoiceState extends State<LogInChoice> {
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
-                              fontSize: 30,
+                              fontSize: 26,
                             ),
                           ),
                           Text(

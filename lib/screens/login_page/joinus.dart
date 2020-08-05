@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-
-class RequestMember {
-  static String firstName;
-  static String lastName;
-  static String email;
-  static String memberInfo;
-  static String whyJoin;
-}
+import 'package:erobot_app/validation/validation.dart';
+import 'package:erobot_app/object_class/classes.dart';
 
 class JoinUs extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -72,11 +66,13 @@ class JoinUs extends StatelessWidget {
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(8)),
-                          padding: EdgeInsets.all(5),
+                          padding: EdgeInsets.only(bottom: 5),
                           child: TextFormField(
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 labelText: "First Name",
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(0, 0, 0, 0.6)),
                                 contentPadding:
                                     EdgeInsets.fromLTRB(10, 5, 20, 0)),
                             validator: (val) {
@@ -94,11 +90,13 @@ class JoinUs extends StatelessWidget {
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(8)),
-                          padding: EdgeInsets.all(5),
+                          padding: EdgeInsets.only(bottom: 5),
                           child: TextFormField(
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 labelText: 'Last name',
+                                labelStyle: TextStyle(
+                                    color: Color.fromRGBO(0, 0, 0, 0.6)),
                                 contentPadding:
                                     EdgeInsets.fromLTRB(10, 5, 20, 0)),
                             validator: (val) {
@@ -123,13 +121,12 @@ class JoinUs extends StatelessWidget {
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             labelText: 'Enter your email address',
+                            labelStyle:
+                                TextStyle(color: Color.fromRGBO(0, 0, 0, 0.6)),
                             contentPadding: EdgeInsets.fromLTRB(10, 5, 20, 0)),
                         validator: (val) {
                           RequestMember.email = val;
-                          if (val.isEmpty)
-                            return 'Please enter your email address';
-                          else
-                            return null;
+                          return validateEmail(val);
                         },
                         keyboardType: TextInputType.text,
                       ),
@@ -144,6 +141,8 @@ class JoinUs extends StatelessWidget {
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             labelText: 'Please introduces yourself',
+                            labelStyle:
+                                TextStyle(color: Color.fromRGBO(0, 0, 0, 0.6)),
                             contentPadding: EdgeInsets.fromLTRB(10, 5, 20, 0)),
                         validator: (val) {
                           RequestMember.memberInfo = val;
@@ -166,6 +165,8 @@ class JoinUs extends StatelessWidget {
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             labelText: 'Why do you want to join us?',
+                            labelStyle:
+                                TextStyle(color: Color.fromRGBO(0, 0, 0, 0.6)),
                             contentPadding: EdgeInsets.fromLTRB(10, 5, 20, 0)),
                         validator: (val) {
                           RequestMember.firstName = val;
