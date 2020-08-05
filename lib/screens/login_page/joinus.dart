@@ -23,7 +23,7 @@ class JoinUs extends StatelessWidget {
           children: <Widget>[
             SizedBox(height: 10),
             Text(
-              'Want be a member?',
+              'Want to be a member?',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w500,
