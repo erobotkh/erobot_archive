@@ -25,6 +25,7 @@ import 'package:erobot_app/screens/drawer_bar/main_drawer.dart';
 import 'package:erobot_app/screens/farm_assistant/farm_assistant.dart';
 import 'package:erobot_app/screens/aboutus/about_member.dart';
 import 'package:erobot_app/screens/aboutus/team_reputation.dart';
+import 'package:erobot_app/screens/login_page/joinus.dart';
 
 Map<int, Color> color = {
   50: Color.fromRGBO(136, 14, 79, .1),
@@ -67,6 +68,7 @@ void main() => runApp(MaterialApp(
         '/ard_car': (context) => ArduinoCar(),
         '/ir_remote': (context) => IrRemoter(),
         '/feedback': (context) => FeedbackApp(),
+        '/joinus': (context) => JoinUs(),
       },
     ));
 
@@ -122,13 +124,14 @@ class _SplashScreenState extends State<SplashScreen> {
                       width: 150,
                     ),
                     SizedBox(
-                      height: 8,
+                      height: 20,
                     ),
                     RichText(
                       text: TextSpan(
                           style: TextStyle(
                             color: Color.fromRGBO(22, 31, 40, 1),
                             fontWeight: FontWeight.w300,
+                            fontFamily: 'Raleway',
                             fontSize: 15,
                           ),
                           children: <TextSpan>[
@@ -213,7 +216,7 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
 
   void handleTabChange() {
     setState(() {
-      tabIndex =_tabController.index;
+      tabIndex = _tabController.index;
     });
     print('Tab Change $tabIndex');
   }

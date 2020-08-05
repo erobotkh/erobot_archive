@@ -56,7 +56,7 @@ class _LogInChoiceState extends State<LogInChoice> {
                             'Erobot member!',
                             style: TextStyle(
                               color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                              fontWeight: FontWeight.w600,
                               fontSize: 30,
                             ),
                           ),
@@ -65,7 +65,7 @@ class _LogInChoiceState extends State<LogInChoice> {
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w300,
-                              fontSize: 15,
+                              fontSize: 18,
                             ),
                           )
                         ],
@@ -106,11 +106,13 @@ class _LogInChoiceState extends State<LogInChoice> {
               height: 10,
             ),
             FlatButton(
-              splashColor: Hexcolor('eeeeee'),
+              splashColor: Color.fromRGBO(0, 0, 0, .1),
               color: Colors.white,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/joinus');
+              },
               child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: 50,
