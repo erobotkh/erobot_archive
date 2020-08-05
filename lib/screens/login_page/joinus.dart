@@ -23,8 +23,8 @@ class JoinUs extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
+        padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+        child: ListView(
           children: <Widget>[
             Text(
               'Want be a member?',
@@ -33,6 +33,7 @@ class JoinUs extends StatelessWidget {
                 fontWeight: FontWeight.w500,
                 fontSize: 25,
               ),
+              textAlign: TextAlign.center,
             ),
             SizedBox(
               height: 5,
@@ -78,9 +79,6 @@ class JoinUs extends StatelessWidget {
                           decoration: InputDecoration(
                               border: InputBorder.none,
                               labelText: "First Name",
-                              labelStyle: TextStyle(
-                                color: Color.fromRGBO(0, 0, 0, 0.6),
-                              ),
                               contentPadding:
                                   EdgeInsets.fromLTRB(10, 5, 20, 0)),
                           validator: (val) {

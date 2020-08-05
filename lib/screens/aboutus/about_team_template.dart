@@ -87,12 +87,14 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
                               child: Row(
                                 //Store left is image and right is info
                                 mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                                   Image.asset('assets/events/$pathLogo'),
                                   SizedBox(
                                     width: 10,
                                   ),
                                   Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Column(
                                           //Store name and role
