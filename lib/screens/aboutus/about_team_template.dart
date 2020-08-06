@@ -47,11 +47,13 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
   final String paragraph2 =
       'អ្វីដែលក្រុមយើងទទួលបាន​ជោគជ័យ​បំផុតនោះគឺ​ ពួកយើងបាននាំអោយ​មនុស្សម្នាជាច្រើនចូលមកកាន់​ ប៉ូត Robot​របស់​យើង​ ហើយលេង​កំសាន្តដោយ​រីករាយ​  ជា​ពិសេសគឺ​ពួកយើង​បាននាំអោយ​ ក្រុម​ហ៊ុន​ ពេញចិត្តនឹងចង់អោយពួកយើង​ បន្តការងារនេះទៅមុខទៀត។ សរុប​ចំនួនទាំងអស់ជិត៣០​ នាក់ពួកយើងបាន​ខិតខំ​យ៉ាងខ្លាំងក្នុងការងារមួយនេះ។​ ក្នុង​រយៈពេលមុន​ និង​អំឡុង​ពេលកម្មវិធី​ មាន​សមាជិក​យើងខ្លះ​ ដែលពួកគាត់​សកម្មរហូតត្រូវមិនគេង​ រយៈពេលជិត៥​ ថ្ងៃហើយមាន​ថ្ងៃខ្លះ​ ពួកយើងមិនបានគេងសោះតែម្ដង។ នេះហើយជា​ឆន្ទៈ​ពិតដោយមិនគិតសោះថាកាងារនោះជាការងារ​ស្មាក់ចិត្ត​។   ខ្ញុំនិយាយទាំងអស់នេះ​ ពិតណាស់មិនអាច​រៀបរាប់​អស់​សេចក្ដី​នោះទេ​ តែខ្ញុំនៅតែ​ចង់ចាំនូវ​សេចក្ដី​ ព្យាយាម​  ប្រឹងប្រែង​ជា​ពិសេសគឺ​មិនខ្លាចភាពនឿយ​ហត់​ របស់ពួកគេ។   បើគ្មានពួកគេទេ​ ខ្ញុំ​ជឿជាក់​ថា​ កម្មវិធី​នោះមិនអាច​ទទួល​បាន​ជោគជ័យ​ដូចនោះទេ។ នេះហើយ​ សកម្មភាព​ និង​ កម្លាំង​របស់​យុវជនយើង​  ពួកគេជាមនុស្ស​រីកចំរើន​។ ក្រោយការងារនេះបាន​បញ្ចប់​  ពួកយើបាន​បន្តការងាររៀនជាមួយគ្នាទៀត។';
 
+  int _imageIndex = 0;
   @override
   Widget build(BuildContext context) {
     String pathLogo = logoList[index - 1];
     String nameEvent = eventName[index - 1];
     String eventdate = eventDate[index - 1];
+
     return Scaffold(
         backgroundColor: Colors.white,
         body: NestedScrollView(
@@ -63,7 +65,8 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
                 floating: false,
                 pinned: true,
                 flexibleSpace: FlexibleSpaceBar(
-                  background: Image.asset('assets/home/our_team.png',
+                  background: Image.asset(
+                      'assets/home/${imagePath[_imageIndex]}',
                       fit: BoxFit.cover),
                 ),
                 title: Text(
@@ -140,7 +143,8 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
             ];
           },
           body: ScrollConfiguration(
-          behavior: ScrollBehavior()..buildViewportChrome(context, null, AxisDirection.down),
+            behavior: ScrollBehavior()
+              ..buildViewportChrome(context, null, AxisDirection.down),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,45 +238,51 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
             ? imagePath.length
             : section == 2 ? names.length : robotNames.length,
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(14, 8, 2, 8),
-            child: Container(
-              child: section != 1
-                  ? Container(
-                      padding: const EdgeInsets.only(top: 5),
-                      child: Text(
-                        ' ' +
-                            (section == 2
-                                ? names[index]
-                                : robotNames[index]) +
-                            ' ',
-                        style: TextStyle(
-                            backgroundColor: Hexcolor('03a0b0'),
-                            color: Colors.white),
+          return GestureDetector(
+            onTap: () {
+              if (section == 1)
+                setState(() {
+                  _imageIndex = index;
+                });
+            },
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(14, 8, 2, 8),
+              child: Container(
+                child: section != 1
+                    ? Container(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Text(
+                          ' ' +
+                              (section == 2
+                                  ? names[index]
+                                  : robotNames[index]) +
+                              ' ',
+                          style: TextStyle(
+                              backgroundColor: Hexcolor('03a0b0'),
+                              color: Colors.white),
+                        ),
+                      )
+                    : null,
+                width: MediaQuery.of(context).size.width * widthContainer,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 0,
+                        blurRadius: 5,
+                        offset: Offset(2, 2), // changes position of shadow
                       ),
-                    )
-                  : Container(
-                      child: Text(''),
-                    ),
-              width: MediaQuery.of(context).size.width * widthContainer,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 0,
-                      blurRadius: 5,
-                      offset: Offset(2, 2), // changes position of shadow
-                    ),
-                  ],
-                  image: DecorationImage(
-                      image: AssetImage(section == 1
-                          ? 'assets/home/${imagePath[index]}'
-                          : section == 2
-                              ? 'assets/profiles/${profilePath[index]}'
-                              : 'assets/home/${profileRobot[index]}'),
-                      fit: BoxFit.cover)),
+                    ],
+                    image: DecorationImage(
+                        image: AssetImage(section == 1
+                            ? 'assets/home/${imagePath[index]}'
+                            : section == 2
+                                ? 'assets/profiles/${profilePath[index]}'
+                                : 'assets/home/${profileRobot[index]}'),
+                        fit: BoxFit.cover)),
+              ),
             ),
           );
         });
