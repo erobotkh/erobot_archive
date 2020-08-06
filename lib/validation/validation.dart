@@ -3,7 +3,6 @@ String validateEmail(String value) {
   Pattern pattern =
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
   RegExp regex = RegExp(pattern);
-  print(value);
   if (value.isEmpty)
     return 'Please enter your email address';
   else {
@@ -24,8 +23,7 @@ String validatePassword(String value) {
   Pattern pattern =
       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
   RegExp regex = RegExp(pattern);
-
-  print(value);
+  
   if (value.isEmpty) {
     return 'Please enter your password';
   } else {

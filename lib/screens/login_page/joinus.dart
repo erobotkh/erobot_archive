@@ -12,7 +12,7 @@ class JoinUs extends StatefulWidget {
 
 class _JoinUsState extends State<JoinUs> {
   final _formKey = GlobalKey<FormState>();
-  var filepath = '0';
+  var _filepath = '0';
 
   @override
   void initState() {
@@ -57,106 +57,106 @@ class _JoinUsState extends State<JoinUs> {
             SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.55,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8)),
-                        padding: EdgeInsets.only(bottom: 5),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              labelText: "First Name",
-                              labelStyle: TextStyle(
-                                  color: Color.fromRGBO(0, 0, 0, 0.6)),
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(10, 5, 20, 0)),
-                          validator: (val) {
-                            RequestMember.firstName = val;
-                            if (val.isEmpty)
-                              return 'Enter your first name';
-                            else
-                              return null;
-                          },
-                          keyboardType: TextInputType.text,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.55,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8)),
-                        padding: EdgeInsets.only(bottom: 5),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              labelText: 'Last name',
-                              labelStyle: TextStyle(
-                                  color: Color.fromRGBO(0, 0, 0, 0.6)),
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(10, 5, 20, 0)),
-                          validator: (val) {
-                            RequestMember.lastName = val;
-                            if (val.isEmpty)
-                              return 'Enter your last name';
-                            else
-                              return null;
-                          },
-                          keyboardType: TextInputType.text,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  CircleAvatar(
-                    backgroundColor: Hexcolor('03a0b0'),
-                    radius: 55,
-                    child: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 50,
-                        backgroundImage: FileImage(File(filepath)),
-                        child: GestureDetector(
-                          onTap: () async {
-                            filepath = await FilePicker.getFilePath(
-                                type: FileType.image);
-                            setState(() {});
-                            print(filepath);
-                          },
-                          child: filepath == '0'
-                              ? CircleAvatar(
-                                  radius: 55,
-                                  backgroundColor:
-                                      Color.fromRGBO(255, 255, 255, .5),
-                                  child: Icon(
-                                    Icons.camera_alt,
-                                    color: Hexcolor('03a0b0'),
-                                    size: 35,
-                                  ),
-                                )
-                              : null,
-                        )),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 0),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: Form(
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.55,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8)),
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    labelText: "First Name",
+                                    labelStyle: TextStyle(
+                                        color: Color.fromRGBO(0, 0, 0, 0.6)),
+                                    contentPadding:
+                                        EdgeInsets.fromLTRB(10, 5, 20, 0)),
+                                validator: (val) {
+                                  RequestMember.firstName = val;
+                                  if (val.isEmpty)
+                                    return 'Enter your first name';
+                                  else
+                                    return null;
+                                },
+                                keyboardType: TextInputType.text,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.55,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8)),
+                              padding: EdgeInsets.only(bottom: 5),
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    labelText: 'Last name',
+                                    labelStyle: TextStyle(
+                                        color: Color.fromRGBO(0, 0, 0, 0.6)),
+                                    contentPadding:
+                                        EdgeInsets.fromLTRB(10, 5, 20, 0)),
+                                validator: (val) {
+                                  RequestMember.lastName = val;
+                                  if (val.isEmpty)
+                                    return 'Enter your last name';
+                                  else
+                                    return null;
+                                },
+                                keyboardType: TextInputType.text,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        CircleAvatar(
+                          backgroundColor: Hexcolor('03a0b0'),
+                          radius: 55,
+                          child: CircleAvatar(
+                              backgroundColor: Colors.white,
+                              radius: 50,
+                              backgroundImage: FileImage(File(_filepath)),
+                              child: GestureDetector(
+                                onTap: () async {
+                                  var filepath = await FilePicker.getFilePath(
+                                      type: FileType.image);
+                                  if (filepath != null) {
+                                    setState(() {
+                                      _filepath = filepath;
+                                    });
+                                  }
+                                  print(_filepath);
+                                },
+                                child: _filepath == '0'
+                                    ? CircleAvatar(
+                                        radius: 55,
+                                        backgroundColor:
+                                            Color.fromRGBO(255, 255, 255, .5),
+                                        child: Icon(
+                                          Icons.camera_alt,
+                                          color: Hexcolor('03a0b0'),
+                                          size: 35,
+                                        ),
+                                      )
+                                    : null,
+                              )),
+                        ),
+                      ],
+                    ),
                     SizedBox(height: 10),
                     Container(
                       decoration: BoxDecoration(
@@ -215,7 +215,7 @@ class _JoinUsState extends State<JoinUs> {
                                 TextStyle(color: Color.fromRGBO(0, 0, 0, 0.6)),
                             contentPadding: EdgeInsets.fromLTRB(10, 5, 20, 0)),
                         validator: (val) {
-                          RequestMember.firstName = val;
+                          RequestMember.whyJoin = val;
                           if (val.isEmpty)
                             return 'Please answer the question';
                           else
@@ -247,7 +247,7 @@ class _JoinUsState extends State<JoinUs> {
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
                               print(
-                                  'Entered validation\nFirstName: ${RequestMember.firstName}');
+                                  'Entered validation: \nFirstName: ${RequestMember.firstName}\nLastName: ${RequestMember.lastName}\nEmail: ${RequestMember.email}\nIntroduces: ${RequestMember.memberInfo}\nWhyJoin: ${RequestMember.whyJoin}');
                             }
                           },
                         ),

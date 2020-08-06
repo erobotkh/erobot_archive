@@ -4,4 +4,5 @@ class RequestMember {
   static String email;
   static String memberInfo;
   static String whyJoin;
+  static String password;
 }
