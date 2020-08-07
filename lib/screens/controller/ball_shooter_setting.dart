@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:erobot_app/object_class/classes.dart';
 
 class BallShooterSetting extends StatefulWidget {
+  //BUTTON DATA FROM BallShooter();
   final String btnTop, btnLeft, btnRight, btnBottom, btnShoot;
   BallShooterSetting(
       this.btnTop, this.btnLeft, this.btnRight, this.btnBottom, this.btnShoot);
@@ -35,7 +36,7 @@ class _BallShooterSettingState extends State<BallShooterSetting> {
         title: Text('Setting'),
         leading: IconButton(
           onPressed: () {
-            //Store data in class before pop back with data
+            //STORE DATA IN CLASS TO POP WITH DATA AS A CLASS
             var button = Button(btnTop, btnLeft, btnBottom, btnRight, btnShoot);
             print('LAST VALUE: ');
             print(button.top +
@@ -47,6 +48,7 @@ class _BallShooterSettingState extends State<BallShooterSetting> {
           },
           icon: Icon(Icons.arrow_back),
         ),
+        //RESET TO DEFAUL BUTTON
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -56,7 +58,7 @@ class _BallShooterSettingState extends State<BallShooterSetting> {
                 borderRadius: BorderRadius.circular(18.0),
               ),
               child: Text(
-                'Reset to defalut',
+                'Reset to defauLt',
                 style: TextStyle(color: Colors.white),
                 textAlign: TextAlign.center,
               ),
@@ -69,6 +71,7 @@ class _BallShooterSettingState extends State<BallShooterSetting> {
           )
         ],
       ),
+      //SETTINGS CONTAINER
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: ListView(

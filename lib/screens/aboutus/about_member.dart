@@ -33,7 +33,7 @@ class AboutMember extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 0.0),
       child: Container(
-          //Store a card
+          //CARD CONTAINER
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(2),
             color: Colors.white,
@@ -42,19 +42,20 @@ class AboutMember extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Row(
-              //Store left is image and right is info
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
+                //IMAGE OF MEMBERS
                 Image.asset('assets/profiles/$pathIMG'),
                 SizedBox(
                   width: 10,
                 ),
+                //INFO OF MEMBERS
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
+                    //NAME AND ROLE
                     Column(
-                        //Store name and role
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
@@ -68,12 +69,13 @@ class AboutMember extends StatelessWidget {
                                 fontWeight: FontWeight.w500, fontSize: 12),
                           ),
                         ]),
+                    //SOCIAL MEDIA INFO
                     Container(
                       width: MediaQuery.of(context).size.width * 0.625,
                       child: Row(
-                        //Store social media information
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
+                          //TELEGRAM
                           ClipOval(
                             child: Material(
                               color: Hexcolor('161F28'),
@@ -98,6 +100,7 @@ class AboutMember extends StatelessWidget {
                           SizedBox(
                             width: 5,
                           ),
+                          //FACEBOOK
                           Container(
                             height: 28,
                             child: FlatButton.icon(

@@ -25,8 +25,8 @@ class HomeScreen extends StatelessWidget {
               context),
           buildBtn('Arduino Car', 'Remoter to Control Arduino Car with speed',
               3, context),
-          buildBtn('IR Remoter', 'to Control Light and Buzzer Arduino', 4,
-              context),
+          buildBtn(
+              'IR Remoter', 'to Control Light and Buzzer Arduino', 4, context),
         ],
         staggeredTiles: [
           StaggeredTile.extent(2, 150),
@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
             Positioned.fill(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(14),
-                child: ImageBackground(cardIndex),
+                child: imageBackground(cardIndex),
               ),
             ),
             Positioned.fill(

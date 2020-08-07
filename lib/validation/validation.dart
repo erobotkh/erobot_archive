@@ -1,4 +1,3 @@
-
 String validateEmail(String value) {
   Pattern pattern =
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
@@ -42,10 +41,4 @@ String validatePassword(String value) {
     else
       return null;
   }
-  // r'^
-  // (?=.*[A-Z])       // should contain at least one upper case
-  // (?=.*[a-z])       // should contain at least one lower case
-  // (?=.*?[0-9])          // should contain at least one digit
-  // (?=.*?[!@#\$&*~]).{8,}  // should contain at least one Special character
-  // $
 }

@@ -16,7 +16,7 @@ class _BallShooterState extends State<BallShooter> {
   String btnRight, btnLeft, btnBottom, btnTop, btnShoot;
   double speed, speedTMP, servo;
 
-  Button button;
+  Button button; //BUTTON CLASS
 
   @override
   void initState() {
@@ -46,6 +46,7 @@ class _BallShooterState extends State<BallShooter> {
     double heightBtn = 55;
     return SafeArea(
       child: Scaffold(
+        //APP BAR
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(22, 31, 40, 1),
           title: Text(
@@ -64,6 +65,7 @@ class _BallShooterState extends State<BallShooter> {
           ],
           elevation: 0.0,
         ),
+        //FLOATING SETTING BUTTON
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.white,
           child: Icon(Icons.settings, color: Hexcolor('B6142C'), size: 25),
@@ -84,6 +86,7 @@ class _BallShooterState extends State<BallShooter> {
             });
           },
         ),
+        // BUTTON CONTAINER
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -93,28 +96,31 @@ class _BallShooterState extends State<BallShooter> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
+                //PAD BUTTON
                 Container(
                   child: Center(
                     child: Column(
                       children: <Widget>[
-                        CreatePadBtn(1, widthBtn, heightBtn, 1, btnTop),
+                        CreatePadBtn(1, 1, btnTop),
                         Row(children: <Widget>[
-                          CreatePadBtn(2, widthBtn, heightBtn, 1, btnLeft),
+                          CreatePadBtn(2, 1, btnLeft),
                           SizedBox(
                             width: widthBtn,
                           ),
-                          CreatePadBtn(3, widthBtn, heightBtn, 1, btnRight),
+                          CreatePadBtn(3, 1, btnRight),
                         ]),
-                        CreatePadBtn(4, widthBtn, heightBtn, 1, btnBottom),
+                        CreatePadBtn(4, 1, btnBottom),
                       ],
                     ),
                   ),
                 ),
+                //SPEED AND SHOOT CONTROLLER
                 Container(
                   width: 250,
                   height: 180,
                   child: Stack(
                     children: <Widget>[
+                      //SPEED TEXT
                       Positioned.directional(
                         textDirection: TextDirection.ltr,
                         start: 40,
@@ -124,6 +130,7 @@ class _BallShooterState extends State<BallShooter> {
                               color: Colors.white, fontFamily: 'Quicksand'),
                         ),
                       ),
+                      //SPEED SLIDER
                       Positioned.fill(
                         child: SleekCircularSlider(
                           initialValue: speedTMP,
@@ -153,6 +160,7 @@ class _BallShooterState extends State<BallShooter> {
                           },
                         ),
                       ),
+                      //SHOOT BUTTON
                       Center(
                         child: ClipOval(
                           child: Material(
@@ -179,6 +187,7 @@ class _BallShooterState extends State<BallShooter> {
                 )
               ],
             ),
+            //SERVO SLIDER ON BOTTOM
             Column(
               children: <Widget>[
                 SizedBox(

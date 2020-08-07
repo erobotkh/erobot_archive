@@ -84,15 +84,15 @@ class _ArduinoCarState extends State<ArduinoCar> {
                   child: Center(
                     child: Column(
                       children: <Widget>[
-                        CreatePadBtn(1, widthBtn, heightBtn, 2, btnTop),
+                        CreatePadBtn(1, 2, btnTop),
                         Row(children: <Widget>[
-                          CreatePadBtn(2, widthBtn, heightBtn, 2, btnLeft),
+                          CreatePadBtn(2, 2, btnLeft),
                           SizedBox(
                             width: widthBtn,
                           ),
-                          CreatePadBtn(3, widthBtn, heightBtn, 2, btnRight),
+                          CreatePadBtn(3, 2, btnRight),
                         ]),
-                        CreatePadBtn(4, widthBtn, heightBtn, 2, btnBottom),
+                        CreatePadBtn(4, 2, btnBottom),
                       ],
                     ),
                   ),

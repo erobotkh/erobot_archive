@@ -12,14 +12,15 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
+  String _email, _password;
+
+  //OBSCURE IS USE FOR SHOW/HIDE PASSWORD
   bool _obscureText = true;
   void _toggle() {
     setState(() {
       _obscureText = !_obscureText;
     });
   }
-
-  String _email, _password;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     textAlign: TextAlign.center,
                   ),
+                  //FORM
                   Form(
                       key: _formKey,
                       child: Column(
@@ -55,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(
                             height: 10,
                           ),
+                          //EMAIL INPUT
                           Container(
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -80,6 +83,8 @@ class _LoginPageState extends State<LoginPage> {
                           SizedBox(
                             height: 10,
                           ),
+
+                          //PASSWORD INPUT
                           Container(
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -140,8 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
-                            print(
-                                'Entered validation\nemail: $_email\npassword: $_password');
+                            print('Entered $_email & $_password');
                           }
                         },
                       ),
@@ -164,6 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
+            //SOCIAL LOGIN
             Column(
               children: <Widget>[
                 Text(
@@ -179,6 +184,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
+                        //LOGIN WITH GOOGLE
                         ClipOval(
                           child: Material(
                             color: Colors.white,
@@ -204,6 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(
                           width: 10,
                         ),
+                        //LOGIN WITH FACEBOOK
                         ClipOval(
                           child: Material(
                             color: Hexcolor('386fde'),

@@ -14,14 +14,11 @@ IconData isConnect() {
   }
 }
 
+// RETURN BUTTON PAD FOR CAR CONTROLLER PAGES
 class CreatePadBtn extends StatelessWidget {
-  //FOR CAR CONTROLLER PAGES
   final int btnIndex, screenNum;
-  final double widthBtn;
-  final double heightBtn;
   final toBluetooth;
-  CreatePadBtn(this.btnIndex, this.widthBtn, this.heightBtn, this.screenNum,
-      this.toBluetooth);
+  CreatePadBtn(this.btnIndex, this.screenNum, this.toBluetooth);
   @override
   Widget build(BuildContext context) {
     return ClipOval(
@@ -30,9 +27,9 @@ class CreatePadBtn extends StatelessWidget {
         child: InkWell(
           splashColor: Colors.black12,
           child: SizedBox(
-            width: widthBtn,
-            height: heightBtn,
-            child: ReturnIcon(btnIndex, widthBtn, screenNum),
+            width: 55,
+            height: 55,
+            child: ReturnIcon(btnIndex, 55, screenNum),
           ),
           onTap: () {
             print(toBluetooth);
@@ -43,6 +40,7 @@ class CreatePadBtn extends StatelessWidget {
   }
 }
 
+// RETURN PAD BUTTON ICONS
 class ReturnIcon extends StatelessWidget {
   final int index;
   final double widthBtn;
@@ -65,8 +63,17 @@ class ReturnIcon extends StatelessWidget {
   }
 }
 
+// Discuss about Card on Homepage and Document page:
+// Each card has 3 layer with with stack together:
+// - 1st layer is image which is image return from imageBackground(); (Homepage only)
+// - 2nd layer is background color with return from randBackground();
+// - 3nd layer is flat button
+
+// RETURN A BACKGROUND COLOR TO CARD
 Widget randBackground(int index) {
   int cardIndex = index % 5;
+
+  //LIST OF COLOR
   var list = [
     '0_111_60.png',
     '249_167_62.png',
@@ -74,8 +81,8 @@ Widget randBackground(int index) {
     '3_160_176.png',
     '231_126_78.png',
   ];
-
   String indexColor = list[cardIndex];
+  
   var color1 = [0, 111, 60];
   var color2 = [249, 167, 62];
   var color3 = [182, 20, 44];
@@ -83,7 +90,6 @@ Widget randBackground(int index) {
   var color5 = [231, 126, 78];
 
   var colorRGBO;
-
   if (cardIndex == 0) colorRGBO = color1;
   if (cardIndex == 1) colorRGBO = color2;
   if (cardIndex == 2) colorRGBO = color3;
@@ -100,8 +106,7 @@ Widget randBackground(int index) {
       ));
 }
 
-// ignore: non_constant_identifier_names
-Widget ImageBackground(int cardIndex) {
+Widget imageBackground(final int cardIndex) {
   if (cardIndex == 0)
     return Image.asset('assets/home/arduino_doc.png', fit: BoxFit.cover);
   if (cardIndex == 1)

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:erobot_app/validation/validation.dart';
 import 'package:erobot_app/object_class/classes.dart';
@@ -16,6 +17,10 @@ class _JoinUsState extends State<JoinUs> {
 
   @override
   void initState() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     super.initState();
   }
 
@@ -67,6 +72,7 @@ class _JoinUsState extends State<JoinUs> {
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
+                            //FIRST NAME INPUT
                             Container(
                               width: MediaQuery.of(context).size.width * 0.55,
                               decoration: BoxDecoration(
@@ -94,6 +100,7 @@ class _JoinUsState extends State<JoinUs> {
                             SizedBox(
                               height: 10,
                             ),
+                            //LAST NAME INPUT
                             Container(
                               width: MediaQuery.of(context).size.width * 0.55,
                               decoration: BoxDecoration(
@@ -123,6 +130,7 @@ class _JoinUsState extends State<JoinUs> {
                         SizedBox(
                           width: 10,
                         ),
+                        //IMAGE PICKER
                         CircleAvatar(
                           backgroundColor: Hexcolor('03a0b0'),
                           radius: 55,
@@ -158,6 +166,8 @@ class _JoinUsState extends State<JoinUs> {
                       ],
                     ),
                     SizedBox(height: 10),
+                    
+                    //EMAIL INPUT
                     Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -178,6 +188,8 @@ class _JoinUsState extends State<JoinUs> {
                       ),
                     ),
                     SizedBox(height: 10),
+
+                    //INTRODUCING INPUT
                     Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -202,6 +214,8 @@ class _JoinUsState extends State<JoinUs> {
                       ),
                     ),
                     SizedBox(height: 10),
+
+                    //WHY JOIN INPUT
                     Container(
                       decoration: BoxDecoration(
                           color: Colors.white,
@@ -226,6 +240,8 @@ class _JoinUsState extends State<JoinUs> {
                       ),
                     ),
                     SizedBox(height: 10),
+                    
+                    //SUBMIT BUTTON
                     Center(
                       child: Container(
                         height: 50,
@@ -258,6 +274,8 @@ class _JoinUsState extends State<JoinUs> {
               ),
             ),
             SizedBox(height: 10),
+
+            //LAST MESSAGE
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
               child: Text(

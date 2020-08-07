@@ -76,6 +76,7 @@ void main() => runApp(MaterialApp(
       },
     ));
 
+//SPLASH SCREEN PAGE
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key key}) : super(key: key);
 
@@ -84,13 +85,15 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final delay = 5;
-
   @override
   void initState() {
-    super.initState();
-    var _duration = Duration(seconds: delay);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    var _duration = Duration(seconds: 5);
     Timer(_duration, navigationPage);
+    super.initState();
   }
 
   void navigationPage() {
@@ -104,10 +107,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
@@ -173,6 +172,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
+//ROOT PAGE
 class Root extends StatefulWidget {
   Root({Key key}) : super(key: key);
   @override
@@ -184,7 +184,7 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
   int tabIndex = 0;
   bool userPageDragging = false;
 
-  //Controller
+  //CONTROLLER
   PreloadPageController _pageController;
   MenuPositionController _menuPositionController;
   TabController _tabController;
@@ -232,86 +232,9 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    DefaultTabController aboutUs = DefaultTabController(
-        //ABOUT US
-        initialIndex: 0,
-        length: 2,
-        child: Scaffold(
-          backgroundColor: Hexcolor('172634'),
-          //Centering the tab bar
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(
-                kToolbarHeight), //kToolbarHeight has same constant that AppBar uses.
-            child: Container(
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Hexcolor('172634'),
-                    blurRadius: 30.0, // soften the shadow
-                    spreadRadius: 0.0, //extend the shadow
-                    offset: Offset(0.0, 0.0),
-                    // Move to (right horizontally, bottom vertically)
-                  )
-                ],
-              ),
-              child: SafeArea(
-                child: Column(
-                  children: <Widget>[
-                    Expanded(child: Container()),
-                    TabBar(
-                      controller: _tabController,
-                      isScrollable: true,
-                      dragStartBehavior: DragStartBehavior.start,
-                      labelStyle: TextStyle(
-                          fontFamily: 'Raleway',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 15),
-                      indicatorColor: Colors.white,
-                      tabs: <Widget>[
-                        Tab(text: 'About Member'),
-                        Tab(text: 'Team Reputation')
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          body: NotificationListener(
-            onNotification: (overscroll) {
-              if (overscroll is UserScrollNotification &&
-                  (overscroll.direction == ScrollDirection.forward ||
-                      overscroll.direction == ScrollDirection.reverse)) {
-                print('scrolling');
-              } else if (overscroll is OverscrollNotification &&
-                  overscroll.overscroll != 0 &&
-                  overscroll.dragDetails != null) {
-                print(overscroll.overscroll);
-                if (overscroll.overscroll > 25 && tabIndex == 0) {
-                  print('Scrolling on tab[0]');
-                } else if (overscroll.overscroll > 20 && tabIndex == 1) {
-                  print('Swaping on tab[1]');
-                  _pageController.animateToPage(3,
-                      curve: Curves.easeOutQuad,
-                      duration: Duration(milliseconds: 300));
-                } else if (overscroll.overscroll < -25 && tabIndex == 0) {
-                  print('Swapping on tab[0]');
-                  _pageController.animateToPage(1,
-                      curve: Curves.easeOutQuad,
-                      duration: Duration(milliseconds: 300));
-                }
-              }
-              return true;
-            },
-            child: TabBarView(controller: _tabController, children: [
-              AboutMember(),
-              TeamReputation(),
-            ]),
-          ),
-        ));
-
     //ROOT PAGE
     return ScrollConfiguration(
+      //ScrollConfiguration IS USED TO HIDE SCROLL EFFECT (WHITE EFFECT)
       behavior: ScrollBehavior()
         ..buildViewportChrome(context, null, AxisDirection.down),
       child: WillPopScope(
@@ -340,23 +263,25 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
           ),
           drawer: MainDrawer(),
           body: Container(
+            //PRELOAD : TO ENSURE PAGES ARE LOADED BEFORE USABLE
             child: PreloadPageView(
               children: <Widget>[
                 HomeScreen(),
                 ArduinoDoc(),
-                aboutUs,
+                aboutUs(),
                 LogInChoice()
               ],
               physics: const AlwaysScrollableScrollPhysics(),
+              preloadPagesCount: 4,
+              controller: _pageController,
               onPageChanged: (index) {
                 setState(() {
                   pageIndex = index;
                 });
               },
-              preloadPagesCount: 4,
-              controller: _pageController,
             ),
           ),
+          //BOTTOM NAVIGATION
           bottomNavigationBar: BubbledNavigationBar(
             defaultBubbleColor: Colors.white,
             backgroundColor: Hexcolor('172634'),
@@ -364,8 +289,12 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
             controller: _menuPositionController,
             itemMargin: EdgeInsets.symmetric(horizontal: 0),
             iconRightMargin: 10,
+
+            //TAB BAR SWITCHING INSPIRED BY FACEBOOK APP
             onTap: (_index) async {
               var duration = 250;
+
+              //FROM PAGE[0] TO PAGE[3] => ANIMATE TO PAGE[2] THEN PAGE[3]
               if (_index == 3 && pageIndex == 0) {
                 await _pageController.animateToPage(2,
                     curve: Curves.easeInOut,
@@ -374,6 +303,7 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
                     curve: Curves.easeInOut,
                     duration: Duration(milliseconds: duration + 100));
               }
+              //FROM PAGE[3] TO PAGE[0] => ANIMATE TO PAGE[1] THEN PAGE[0]
               if (_index == 0 && pageIndex == 3) {
                 await _pageController.animateToPage(1,
                     curve: Curves.easeInOut,
@@ -382,9 +312,10 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
                     curve: Curves.easeInOut,
                     duration: Duration(milliseconds: duration + 100));
               }
+              //FROM PAGE THAT INDEX -= 2 => ANIMATE TO MIDDLE PAGE THEN DESTINATION
               if ((_index - pageIndex) == 2 || (pageIndex - _index) == 2) {
-                int _indexR;
-                if (_index > pageIndex)
+                int _indexR; //Destination
+                if (_index > pageIndex) //Check which is destination
                   _indexR = pageIndex;
                 else
                   _indexR = _index;
@@ -394,13 +325,17 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
                 _pageController.animateToPage(_index,
                     curve: Curves.easeInOut,
                     duration: Duration(milliseconds: duration + 100));
-              } else {
+              }
+              //FROM PAGE THAT INDEX -= 1 => ANIMATE TO PAGE DIRECTLY
+              else {
                 _pageController.animateToPage(_index,
                     curve: Curves.easeInOut,
                     duration: Duration(milliseconds: duration + 100));
               }
             },
+            //BOTTOM NAVIGATION ITEMS
             items: <BubbledNavigationBarItem>[
+              //HOME
               BubbledNavigationBarItem(
                 icon: Icon(Icons.home, size: 30, color: Colors.white),
                 activeIcon: Icon(
@@ -413,6 +348,7 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
                   style: TextStyle(color: Hexcolor('172634'), fontSize: 12),
                 ),
               ),
+              //EDUCATION
               BubbledNavigationBarItem(
                 icon: Icon(Icons.school, size: 30, color: Colors.white),
                 activeIcon: Icon(
@@ -430,6 +366,7 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
                       letterSpacing: .5),
                 ),
               ),
+              //ABOUT US
               BubbledNavigationBarItem(
                 icon: Icon(Icons.people, size: 30, color: Colors.white),
                 activeIcon: Icon(
@@ -447,6 +384,7 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
                       letterSpacing: .5),
                 ),
               ),
+              //PROFILE
               BubbledNavigationBarItem(
                 icon: Icon(Icons.person, size: 30, color: Colors.white),
                 activeIcon: Icon(
@@ -471,6 +409,95 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
     );
   }
 
+  //ABOUT US SCREEN WITH TWO TABS
+  DefaultTabController aboutUs() {
+    return DefaultTabController(
+        initialIndex: 0,
+        length: 2,
+        child: Scaffold(
+          backgroundColor: Hexcolor('172634'),
+          //CENTERING APP BAR
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(
+                kToolbarHeight), //kToolbarHeight HAS SAME CONSTANT THAT AppBar USES.
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Hexcolor('172634'),
+                    blurRadius: 30.0,
+                    spreadRadius: 0.0,
+                    offset: Offset(0.0, 0.0),
+                    // MOVE TO (RIGHT HORIZONTALLY, BOTTOM VERTICALLY)
+                  )
+                ],
+              ),
+              //TAB BAR
+              child: SafeArea(
+                child: Column(
+                  children: <Widget>[
+                    Expanded(child: Container()),
+                    TabBar(
+                      controller: _tabController,
+                      isScrollable: true,
+                      dragStartBehavior: DragStartBehavior.start,
+                      labelStyle: TextStyle(
+                          fontFamily: 'Raleway',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15),
+                      indicatorColor: Colors.white,
+                      tabs: <Widget>[
+                        Tab(text: 'About Member'),
+                        Tab(text: 'Team Reputation')
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //MERGE TAB VIEW WITH PAGE VIEW
+          body: NotificationListener(
+            onNotification: (overscroll) {
+              if (overscroll is UserScrollNotification &&
+                  (overscroll.direction == ScrollDirection.forward ||
+                      overscroll.direction == ScrollDirection.reverse)) {
+                print('scrolling');
+              } else if (overscroll is OverscrollNotification &&
+                  overscroll.overscroll != 0 &&
+                  overscroll.dragDetails != null) {
+                print(overscroll.overscroll);
+
+                //IF USER SCROLL DOWN ON TAB[0] => DO NOTHINGS
+                if (overscroll.overscroll > 25 && tabIndex == 0) {
+                  print('Scrolling on tab[0]');
+                }
+                //IF USER SWAP LEFT ON TAB[1] => ANIMATE TO PAGE 3 (LOGIN)
+                else if (overscroll.overscroll > 20 && tabIndex == 1) {
+                  print('Swaping on tab[1]');
+                  _pageController.animateToPage(3,
+                      curve: Curves.easeOutQuad,
+                      duration: Duration(milliseconds: 300));
+                }
+                //IF USER SWAP LEFT ON TAB[1] => ANIMATE TO PAGE 1 (EDUCATON)
+                else if (overscroll.overscroll < -25 && tabIndex == 0) {
+                  print('Swapping on tab[0]');
+                  _pageController.animateToPage(1,
+                      curve: Curves.easeOutQuad,
+                      duration: Duration(milliseconds: 300));
+                }
+              }
+              return true;
+            },
+            child: TabBarView(controller: _tabController, children: [
+              AboutMember(),
+              TeamReputation(),
+            ]),
+          ),
+        ));
+  }
+
+  //HUDDLE BACK PRESSED
   Future<bool> _onBackPressed() {
     return showDialog(
           context: context,
@@ -512,6 +539,7 @@ class _RootState extends State<Root> with SingleTickerProviderStateMixin {
   }
 }
 
+//YES or NO BUTTON ON DIALOG
 class DialogBtn extends StatelessWidget {
   final String yRN;
   DialogBtn(this.yRN);

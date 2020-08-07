@@ -14,26 +14,24 @@ class _TeamReputationState extends State<TeamReputation> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: ListView(
-      //Store all cards
       children: <Widget>[
         buildProfileCard('PNC Event', '19th Jul, 2019', 'pnc.png', 1, context),
         buildProfileCard(
             'Smart Event', '19th Jul, 2019', 'smart.png', 2, context),
         buildProfileCard(
             'Stem Event', '19th Jul, 2019', 'stem.png', 3, context),
-        SizedBox(
-          height: 10,
-        ),
+        SizedBox(height: 10),
       ],
     ));
   }
 
+  //CREATE EVENT CARDS
   Padding buildProfileCard(String name, String role, String pathIMG, int index,
       BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(18.0, 10.0, 18.0, 0.0),
       child: Container(
-          //Store a card
+          //CARD CONTAINER
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(2),
             color: Colors.white,
@@ -42,36 +40,39 @@ class _TeamReputationState extends State<TeamReputation> {
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Row(
-              //Store left is image and right is info
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
+                //EVENT LOGO
                 Image.asset('assets/events/$pathIMG'),
                 SizedBox(
                   width: 10,
                 ),
+                //EVENT INFO
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Column(
-                        //Store name and role
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
+                          //EVENT NAME
                           Text(
                             name,
                             style: TextStyle(
                                 fontWeight: FontWeight.w500, fontSize: 18),
                           ),
+                          //EVENT ROLE
                           Text(
                             role,
                             style: TextStyle(
                                 fontWeight: FontWeight.w500, fontSize: 12),
                           ),
                         ]),
+
+                    //READ MORE BUTTON
                     Container(
                       width: MediaQuery.of(context).size.width * 0.625,
                       child: Row(
-                        //Store social media information
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           Container(

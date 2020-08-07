@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class AboutTeamTemplate extends StatefulWidget {
-  final index;
+  final index; //ARTICLE INDEX FROM TeamReputation();
   AboutTeamTemplate(this.index);
   @override
   _AboutTeamTemplateState createState() => _AboutTeamTemplateState(index);
@@ -20,7 +20,7 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
     '12th Feb 2019'
   ];
 
-  //Section 1 - Memories
+  //SECTION 1 - MEMORIES
   final List<String> imagePath = [
     'arduino_doc.png',
     'our_team.png',
@@ -30,11 +30,11 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
     'our_team.png'
   ];
 
-  //Section 2 - Participating Member
+  //SECTION 2 - PARTICIPATING MEMBER
   final List<String> names = ['Suy Kosal', 'Han Leangsiv', 'Run Seyha'];
   final List<String> profilePath = ['kosal.png', 'leangsiv.png', 'seyha.png'];
 
-  //Section 3 - Robot used
+  //SECTION 3 - ROBOT USED
   final List<String> robotNames = ['Car runner', 'Ball shooter', 'Car runner'];
   final List<String> profileRobot = [
     'car_runner.png',
@@ -47,6 +47,7 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
   final String paragraph2 =
       'អ្វីដែលក្រុមយើងទទួលបាន​ជោគជ័យ​បំផុតនោះគឺ​ ពួកយើងបាននាំអោយ​មនុស្សម្នាជាច្រើនចូលមកកាន់​ ប៉ូត Robot​របស់​យើង​ ហើយលេង​កំសាន្តដោយ​រីករាយ​  ជា​ពិសេសគឺ​ពួកយើង​បាននាំអោយ​ ក្រុម​ហ៊ុន​ ពេញចិត្តនឹងចង់អោយពួកយើង​ បន្តការងារនេះទៅមុខទៀត។ សរុប​ចំនួនទាំងអស់ជិត៣០​ នាក់ពួកយើងបាន​ខិតខំ​យ៉ាងខ្លាំងក្នុងការងារមួយនេះ។​ ក្នុង​រយៈពេលមុន​ និង​អំឡុង​ពេលកម្មវិធី​ មាន​សមាជិក​យើងខ្លះ​ ដែលពួកគាត់​សកម្មរហូតត្រូវមិនគេង​ រយៈពេលជិត៥​ ថ្ងៃហើយមាន​ថ្ងៃខ្លះ​ ពួកយើងមិនបានគេងសោះតែម្ដង។ នេះហើយជា​ឆន្ទៈ​ពិតដោយមិនគិតសោះថាកាងារនោះជាការងារ​ស្មាក់ចិត្ត​។   ខ្ញុំនិយាយទាំងអស់នេះ​ ពិតណាស់មិនអាច​រៀបរាប់​អស់​សេចក្ដី​នោះទេ​ តែខ្ញុំនៅតែ​ចង់ចាំនូវ​សេចក្ដី​ ព្យាយាម​  ប្រឹងប្រែង​ជា​ពិសេសគឺ​មិនខ្លាចភាពនឿយ​ហត់​ របស់ពួកគេ។   បើគ្មានពួកគេទេ​ ខ្ញុំ​ជឿជាក់​ថា​ កម្មវិធី​នោះមិនអាច​ទទួល​បាន​ជោគជ័យ​ដូចនោះទេ។ នេះហើយ​ សកម្មភាព​ និង​ កម្លាំង​របស់​យុវជនយើង​  ពួកគេជាមនុស្ស​រីកចំរើន​។ ក្រោយការងារនេះបាន​បញ្ចប់​  ពួកយើបាន​បន្តការងាររៀនជាមួយគ្នាទៀត។';
 
+  //IMAGE INDEX FROM LIST (FOR CHANGE IMAGE ON SLIVER APP BAR)
   int _imageIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -59,16 +60,19 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
+              //SLIVER APP BAR
               SliverAppBar(
                 iconTheme: IconThemeData(color: Hexcolor('172634')),
                 expandedHeight: 400,
                 floating: false,
                 pinned: true,
+                //APP BAR BACKGROUND
                 flexibleSpace: FlexibleSpaceBar(
                   background: Image.asset(
                       'assets/home/${imagePath[_imageIndex]}',
                       fit: BoxFit.cover),
                 ),
+                //APP BAR
                 title: Text(
                   nameEvent,
                   style: TextStyle(
@@ -88,28 +92,29 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
                           child: Container(
                               height: 85,
                               child: Row(
-                                //Store left is image and right is info
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
+                                  //EVENT IMAGE
                                   Image.asset('assets/events/$pathLogo'),
                                   SizedBox(
                                     width: 10,
                                   ),
+                                  //EVENT NAME AND TITLE
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Column(
-                                          //Store name and role
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment:CrossAxisAlignment.start,
                                           children: <Widget>[
+                                            //EVENT NAME
                                             Text(
                                               nameEvent,
                                               style: TextStyle(
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 18),
                                             ),
+                                            //EVENT DATE
                                             Text(
                                               eventdate,
                                               style: TextStyle(
@@ -142,6 +147,7 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
               ),
             ];
           },
+          //HIDE SCROLL END EFFECT
           body: ScrollConfiguration(
             behavior: ScrollBehavior()
               ..buildViewportChrome(context, null, AxisDirection.down),
@@ -149,7 +155,7 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  //Section1 - Memories
+                  //SECTION 1 - MEMORIES
                   Text(
                     '   ' + 'Memories',
                     style: TextStyle(
@@ -170,7 +176,7 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
                     height: 8,
                   ),
 
-                  //Section2 - Participating Members
+                  //SECTION2 - PARTICIPATING MEMBERS
                   Text(
                     '   ' + 'Participating Members',
                     style: TextStyle(
@@ -185,7 +191,7 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
                   SizedBox(
                     height: 8,
                   ),
-                  //Section3 - Robots used
+                  //SECTION 3 - ROBOT USED
                   Text(
                     '   ' + 'Robots used at the Event',
                     style: TextStyle(
@@ -205,6 +211,7 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
                   SizedBox(
                     height: 5,
                   ),
+                  // AUTHOR
                   RichText(
                     text: TextSpan(
                         style: TextStyle(
@@ -231,6 +238,7 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
         ));
   }
 
+  //IMAGE LIST WITH HORIZONTAL SCROLL
   ListView buildListView(double widthContainer, int section) {
     return ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -238,6 +246,7 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
             ? imagePath.length
             : section == 2 ? names.length : robotNames.length,
         itemBuilder: (context, index) {
+          //CLICK TO CHANGE IMAGE (SECTION 1 ONLY)
           return GestureDetector(
             onTap: () {
               if (section == 1)
@@ -248,6 +257,7 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(14, 8, 2, 8),
               child: Container(
+                // IF != SECTION 1 => NO NAME ON IMAGE
                 child: section != 1
                     ? Container(
                         padding: const EdgeInsets.only(top: 5),
@@ -264,6 +274,8 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
                       )
                     : null,
                 width: MediaQuery.of(context).size.width * widthContainer,
+
+                //BACKGROUND IMAGE WITH SHADOW
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(5),
@@ -272,7 +284,7 @@ class _AboutTeamTemplateState extends State<AboutTeamTemplate> {
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 0,
                         blurRadius: 5,
-                        offset: Offset(2, 2), // changes position of shadow
+                        offset: Offset(2, 2),
                       ),
                     ],
                     image: DecorationImage(
