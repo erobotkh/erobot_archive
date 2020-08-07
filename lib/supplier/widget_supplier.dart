@@ -14,14 +14,14 @@ IconData isConnect() {
   }
 }
 
-// ignore: must_be_immutable
 class CreatePadBtn extends StatelessWidget {
-  //For car controller page
-  int btnIndex, screenNum;
-  double widthBtn;
-  double heightBtn;
-  var toBluetooth;
-  CreatePadBtn(this.btnIndex, this.widthBtn, this.heightBtn, this.screenNum, this.toBluetooth);
+  //FOR CAR CONTROLLER PAGES
+  final int btnIndex, screenNum;
+  final double widthBtn;
+  final double heightBtn;
+  final toBluetooth;
+  CreatePadBtn(this.btnIndex, this.widthBtn, this.heightBtn, this.screenNum,
+      this.toBluetooth);
   @override
   Widget build(BuildContext context) {
     return ClipOval(
@@ -43,16 +43,15 @@ class CreatePadBtn extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
 class ReturnIcon extends StatelessWidget {
-  int index;
-  double widthBtn;
-  int screenNum;
-  var icon;
+  final int index;
+  final double widthBtn;
+  final int screenNum;
   ReturnIcon(this.index, this.widthBtn, this.screenNum);
 
   @override
   Widget build(BuildContext context) {
+    var icon;
     if (index == 1) icon = FontAwesomeIcons.angleUp;
     if (index == 2) icon = FontAwesomeIcons.angleLeft;
     if (index == 3) icon = FontAwesomeIcons.angleRight;

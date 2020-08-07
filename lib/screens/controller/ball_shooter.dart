@@ -4,10 +4,10 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:erobot_app/supplier/widget_supplier.dart';
 import 'package:erobot_app/screens/controller/ball_shooter_setting.dart';
+import 'package:erobot_app/object_class/classes.dart';
 
 class BallShooter extends StatefulWidget {
   BallShooter({Key key}) : super(key: key);
-
   @override
   _BallShooterState createState() => _BallShooterState();
 }
@@ -15,6 +15,8 @@ class BallShooter extends StatefulWidget {
 class _BallShooterState extends State<BallShooter> {
   String btnRight, btnLeft, btnBottom, btnTop, btnShoot;
   double speed, speedTMP, servo;
+
+  Button button;
 
   @override
   void initState() {
@@ -65,12 +67,21 @@ class _BallShooterState extends State<BallShooter> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.white,
           child: Icon(Icons.settings, color: Hexcolor('B6142C'), size: 25),
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+            Button button = await Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => BallShooterSetting(
                         btnTop, btnLeft, btnRight, btnBottom, btnShoot)));
+            setState(() {
+              if (button != null) {
+                btnRight = button.right;
+                btnLeft = button.left;
+                btnBottom = button.bottom;
+                btnTop = button.top;
+                btnShoot = button.shoot;
+              }
+            });
           },
         ),
         body: Column(
