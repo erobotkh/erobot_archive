@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:erobot_app/supplier/widget_supplier.dart';
+import 'package:erobot_app/screens/controller/ball_shooter_setting.dart';
 
 class BallShooter extends StatefulWidget {
   BallShooter({Key key}) : super(key: key);
@@ -12,6 +13,24 @@ class BallShooter extends StatefulWidget {
 }
 
 class _BallShooterState extends State<BallShooter> {
+  String btnRight, btnLeft, btnBottom, btnTop, btnShoot;
+  double speed, speedTMP, servo;
+
+  @override
+  void initState() {
+    btnRight = 'R';
+    btnLeft = 'L';
+    btnBottom = 'B';
+    btnTop = 'T';
+    btnShoot = 'S';
+    servo = 4;
+    speedTMP = 5;
+    speed = 5;
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
+    super.initState();
+  }
+
   @override
   dispose() {
     SystemChrome.setPreferredOrientations(
@@ -20,14 +39,9 @@ class _BallShooterState extends State<BallShooter> {
   }
 
   @override
-  void initState() {
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    double widthBtn = 55;
+    double heightBtn = 55;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -44,12 +58,20 @@ class _BallShooterState extends State<BallShooter> {
             fit: BoxFit.fill,
           ),
           actions: <Widget>[
-            IconButton(
-                icon: Icon(isConnect()),
-                onPressed: () {
-                })
+            IconButton(icon: Icon(isConnect()), onPressed: () {})
           ],
           elevation: 0.0,
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.white,
+          child: Icon(Icons.settings, color: Hexcolor('B6142C'), size: 25),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => BallShooterSetting(
+                        btnTop, btnLeft, btnRight, btnBottom, btnShoot)));
+          },
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -64,15 +86,15 @@ class _BallShooterState extends State<BallShooter> {
                   child: Center(
                     child: Column(
                       children: <Widget>[
-                        CreatePadBtn(1, widthBtn, heightBtn, 1),
+                        CreatePadBtn(1, widthBtn, heightBtn, 1, btnTop),
                         Row(children: <Widget>[
-                          CreatePadBtn(2, widthBtn, heightBtn, 1),
+                          CreatePadBtn(2, widthBtn, heightBtn, 1, btnLeft),
                           SizedBox(
                             width: widthBtn,
                           ),
-                          CreatePadBtn(3, widthBtn, heightBtn, 1),
+                          CreatePadBtn(3, widthBtn, heightBtn, 1, btnRight),
                         ]),
-                        CreatePadBtn(4, widthBtn, heightBtn, 1),
+                        CreatePadBtn(4, widthBtn, heightBtn, 1, btnBottom),
                       ],
                     ),
                   ),
@@ -114,6 +136,8 @@ class _BallShooterState extends State<BallShooter> {
                             setState(() {
                               speed = speedTMP.roundToDouble();
                             });
+                          },
+                          onChangeEnd: (speedTMP) {
                             print(speed);
                           },
                         ),
@@ -132,7 +156,9 @@ class _BallShooterState extends State<BallShooter> {
                                     size: widthBtn,
                                     color: Colors.white,
                                   )),
-                              onTap: () {},
+                              onTap: () {
+                                print(btnShoot);
+                              },
                             ),
                           ),
                         ),
@@ -179,6 +205,8 @@ class _BallShooterState extends State<BallShooter> {
                             setState(() {
                               servo = servoTMP.roundToDouble();
                             });
+                          },
+                          onChangeEnd: (servoTMP) {
                             print(servo);
                           },
                         ),

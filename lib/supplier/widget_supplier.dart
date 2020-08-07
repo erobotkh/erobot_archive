@@ -2,16 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-const double widthBtn = 55;
-const double heightBtn = 55;
-double speed = 5;
-double speedTMP = 5;
-double servo = 5;
-var bltBtn1; //this will send to arduino
-var bltBtn2;
-var bltBtn3;
-var bltBtn4;
-
 bool isConnected = false;
 
 IconData isConnect() {
@@ -27,11 +17,11 @@ IconData isConnect() {
 // ignore: must_be_immutable
 class CreatePadBtn extends StatelessWidget {
   //For car controller page
-  int btnIndex;
+  int btnIndex, screenNum;
   double widthBtn;
   double heightBtn;
-  int screenNum;
-  CreatePadBtn(this.btnIndex, this.widthBtn, this.heightBtn, this.screenNum);
+  var toBluetooth;
+  CreatePadBtn(this.btnIndex, this.widthBtn, this.heightBtn, this.screenNum, this.toBluetooth);
   @override
   Widget build(BuildContext context) {
     return ClipOval(
@@ -44,7 +34,9 @@ class CreatePadBtn extends StatelessWidget {
             height: heightBtn,
             child: ReturnIcon(btnIndex, widthBtn, screenNum),
           ),
-          onTap: () {},
+          onTap: () {
+            print(toBluetooth);
+          },
         ),
       ),
     );

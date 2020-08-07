@@ -12,6 +12,23 @@ class ArduinoCar extends StatefulWidget {
 }
 
 class _ArduinoCarState extends State<ArduinoCar> {
+  String btnRight, btnLeft, btnBottom, btnTop, btnShoot;
+  double speed, speedTMP;
+
+  @override
+  void initState() {
+    btnRight = 'R';
+    btnLeft = 'L';
+    btnBottom = 'B';
+    btnTop = 'T';
+    btnShoot = 'S';
+    speedTMP = 5;
+    speed = 5;
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
+    super.initState();
+  }
+
   @override
   dispose() {
     SystemChrome.setPreferredOrientations(
@@ -20,14 +37,10 @@ class _ArduinoCarState extends State<ArduinoCar> {
   }
 
   @override
-  void initState() {
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    double widthBtn = 55;
+    double heightBtn = 55;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -71,15 +84,15 @@ class _ArduinoCarState extends State<ArduinoCar> {
                   child: Center(
                     child: Column(
                       children: <Widget>[
-                        CreatePadBtn(1, widthBtn, heightBtn, 2),
+                        CreatePadBtn(1, widthBtn, heightBtn, 2, btnTop),
                         Row(children: <Widget>[
-                          CreatePadBtn(2, widthBtn, heightBtn, 2),
+                          CreatePadBtn(2, widthBtn, heightBtn, 2, btnLeft),
                           SizedBox(
                             width: widthBtn,
                           ),
-                          CreatePadBtn(3, widthBtn, heightBtn, 2),
+                          CreatePadBtn(3, widthBtn, heightBtn, 2, btnRight),
                         ]),
-                        CreatePadBtn(4, widthBtn, heightBtn, 2),
+                        CreatePadBtn(4, widthBtn, heightBtn, 2, btnBottom),
                       ],
                     ),
                   ),
@@ -91,7 +104,7 @@ class _ArduinoCarState extends State<ArduinoCar> {
                     children: <Widget>[
                       Positioned.directional(
                         textDirection: TextDirection.ltr,
-                        start: 40,
+                        start: speed,
                         child: Text(
                           'Speed: $speed',
                           style: TextStyle(
@@ -117,7 +130,7 @@ class _ArduinoCarState extends State<ArduinoCar> {
                             angleRange: 180,
                             counterClockwise: true,
                           ),
-                          onChange: (speedTMP) {
+                          onChangeEnd: (speedTMP) {
                             setState(() {
                               speed = speedTMP.roundToDouble();
                             });
@@ -139,7 +152,9 @@ class _ArduinoCarState extends State<ArduinoCar> {
                                     size: widthBtn,
                                     color: Colors.white,
                                   )),
-                              onTap: () {},
+                              onTap: () {
+                                print(btnShoot);
+                              },
                             ),
                           ),
                         ),
