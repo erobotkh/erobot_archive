@@ -48,7 +48,7 @@ class _ControllerState extends State<Controller> {
   //WHEN CLICK SPEED UP BUTTON - PROBLEM WHEN SPEED = 0
   //SO SET IT TO VALUE 1 BEFORE ANIMATE TO VALUE 1
   //REMOVE THE CONDITION TO TEST IT
-  Future<void> updateSpeed() async {
+  void updateSpeed() {
     if (speedTMP == 0 || speed == 0) {
       setState(() {
         speedTMP = 1;
@@ -223,8 +223,8 @@ class _ControllerState extends State<Controller> {
                                       speedTMP < 9 ||
                                       speedTMP >= 0 ||
                                       speed >= 0) {
-                                    setState(() async {
-                                      await updateSpeed();
+                                    setState(() {
+                                      updateSpeed();
                                       speedTMP = speed.roundToDouble();
                                     });
                                     print(speed);
