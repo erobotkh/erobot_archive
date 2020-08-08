@@ -31,7 +31,7 @@ class _BallShooterSettingState extends State<BallShooterSetting> {
     return Scaffold(
       resizeToAvoidBottomPadding: true,
       appBar: AppBar(
-        title: Text('Setting'),
+        title: Text('Setting', style: TextStyle(fontSize: 18),),
         leading: IconButton(
           onPressed: () {
             //STORE DATA IN CLASS TO POP WITH DATA AS A CLASS

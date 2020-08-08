@@ -75,12 +75,15 @@ class HomeScreen extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(14.0))),
                 onPressed: () {
                   String routeP;
-                  if (cardIndex == 0){ routeP = '/farm_assistant';}
-                  if (cardIndex == 1) routeP = '/sender';
-                  if (cardIndex == 2) Navigator.push(context, MaterialPageRoute(builder: (context)=> Controller(1)));
-                  if (cardIndex == 3) Navigator.push(context, MaterialPageRoute(builder: (context)=> Controller(2)));
-                  if (cardIndex == 4) routeP = '/ir_remote';
-                  Navigator.pushNamed(context, routeP);
+                  if (cardIndex == 2 || cardIndex == 3) {
+                    if (cardIndex == 2) buildtoCarController(context, 1);
+                    if (cardIndex == 3) buildtoCarController(context, 2);
+                  } else {
+                    if (cardIndex == 0) routeP = '/farm_assistant';
+                    if (cardIndex == 1) routeP = '/sender';
+                    if (cardIndex == 4) routeP = '/ir_remote';
+                    Navigator.pushNamed(context, routeP);
+                  }
                 },
                 splashColor: Color.fromRGBO(255, 255, 255, .2),
                 child: Column(
@@ -131,5 +134,10 @@ class HomeScreen extends StatelessWidget {
             )
           ])),
     );
+  }
+
+  Future buildtoCarController(BuildContext context, int _cardIndex) {
+    return Navigator.push(context,
+        MaterialPageRoute(builder: (context) => Controller(_cardIndex)));
   }
 }
