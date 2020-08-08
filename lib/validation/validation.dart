@@ -22,7 +22,7 @@ String validatePassword(String value) {
   Pattern pattern =
       r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
   RegExp regex = RegExp(pattern);
-  
+
   if (value.isEmpty) {
     return 'Please enter your password';
   } else {
@@ -41,4 +41,17 @@ String validatePassword(String value) {
     else
       return null;
   }
+}
+
+bool buttonValidator(String value, List<String> buttons) {
+  int k = 0;
+  for (String i in buttons) {
+    if (i == value) k++;
+  }
+  if (k == 0)
+    return true;
+  else if (k > 0)
+    return false;
+  else
+    return null;
 }

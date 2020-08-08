@@ -1,0 +1,1 @@
+[{"outputType":{"type":"APK"},"apkData":{"type":"FULL_SPLIT","splits":[{"filterType":"ABI","value":"arm64-v8a"}],"versionCode":2001,"versionName":"1.0.0","enabled":true,"filterName":"arm64-v8a","outputFile":"app-arm64-v8a-release.apk","fullName":"arm64-v8aRelease","baseName":"arm64-v8a-release"},"path":"app-arm64-v8a-release.apk","properties":{}}]

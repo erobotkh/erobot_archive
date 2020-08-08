@@ -14,8 +14,6 @@ import 'package:flutter/gestures.dart';
 //Screens
 import 'package:erobot_app/screens/arduino_doc/arduino_doc.dart';
 import 'package:erobot_app/screens/sender/sender.dart';
-import 'package:erobot_app/screens/controller/ball_shooter.dart';
-import 'package:erobot_app/screens/controller/arduino_car.dart';
 import 'package:erobot_app/screens/ir_remoter/ir_remoter.dart';
 import 'package:erobot_app/screens/home_page/home.dart';
 import 'package:erobot_app/screens/drawer_bar/feedback.dart';
@@ -68,8 +66,6 @@ void main() => runApp(MaterialApp(
         '/loginP': (context) => LoginPage(),
         '/farm_assistant': (context) => FarmAssistant(),
         '/sender': (context) => Sender(),
-        '/shooter': (context) => BallShooter(),
-        '/ard_car': (context) => ArduinoCar(),
         '/ir_remote': (context) => IrRemoter(),
         '/feedback': (context) => FeedbackApp(),
         '/joinus': (context) => JoinUs(),
