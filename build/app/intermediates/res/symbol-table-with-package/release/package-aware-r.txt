@@ -1,4 +1,4 @@
-com.example.erobot_app
+com.erobot.erobot_app
 attr alpha
 attr font
 attr fontProviderAuthority

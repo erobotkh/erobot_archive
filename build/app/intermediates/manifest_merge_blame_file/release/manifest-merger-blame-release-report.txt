@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.example.erobot_app"
+3    package="com.erobot.erobot_app"
 4    android:versionCode="2001"
 5    android:versionName="1.0.0" >
 6
@@ -32,7 +32,7 @@
 23-->/home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:11:9-31
 24        <activity
 24-->/home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:13:9-41:20
-25            android:name="com.example.erobot_app.MainActivity"
+25            android:name="com.erobot.erobot_app.MainActivity"
 25-->/home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:14:13-41
 26            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
 26-->/home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:17:13-163

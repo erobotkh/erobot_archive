@@ -24,7 +24,7 @@ INJECTED from /home/thea/Coding/Projects/erobot_app/android/app/src/main/Android
 INJECTED from /home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:1:1-48:12
 INJECTED from /home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:1:1-48:12
 	package
-		ADDED from /home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:2:5-37
+		ADDED from /home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:2:5-36
 		INJECTED from /home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml
 	android:versionName
@@ -57,7 +57,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/thea/
 		ADDED from /home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:12:9-45
 	android:name
 		ADDED from /home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:10:9-57
-activity#com.example.erobot_app.MainActivity
+activity#com.erobot.erobot_app.MainActivity
 ADDED from /home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:13:9-41:20
 	android:launchMode
 		ADDED from /home/thea/Coding/Projects/erobot_app/android/app/src/main/AndroidManifest.xml:15:13-43

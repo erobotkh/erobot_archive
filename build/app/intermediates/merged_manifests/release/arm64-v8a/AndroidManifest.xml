@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.erobot_app"
+    package="com.erobot.erobot_app"
     android:versionCode="2001"
     android:versionName="1.0.0" >
 
@@ -22,7 +22,7 @@
         android:icon="@mipmap/launcher_icon"
         android:label="Erobot" >
         <activity
-            android:name="com.example.erobot_app.MainActivity"
+            android:name="com.erobot.erobot_app.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"

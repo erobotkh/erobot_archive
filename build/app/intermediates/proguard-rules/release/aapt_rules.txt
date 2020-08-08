@@ -1,6 +1,6 @@
 # Referenced at /home/thea/Coding/Projects/erobot_app/build/app/intermediates/merged_manifests/release/arm64-v8a/AndroidManifest.xml:19
 -keep class androidx.core.app.CoreComponentFactory { <init>(); }
 # Referenced at /home/thea/Coding/Projects/erobot_app/build/app/intermediates/merged_manifests/release/arm64-v8a/AndroidManifest.xml:24
--keep class com.example.erobot_app.MainActivity { <init>(); }
+-keep class com.erobot.erobot_app.MainActivity { <init>(); }
 # Referenced at /home/thea/Coding/Projects/erobot_app/build/app/intermediates/merged_manifests/release/arm64-v8a/AndroidManifest.xml:19
 -keep class io.flutter.app.FlutterApplication { <init>(); }

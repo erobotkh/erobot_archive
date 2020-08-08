@@ -1,4 +1,4 @@
-#Sat Aug 08 13:36:21 ICT 2020
+#Sat Aug 08 17:58:14 ICT 2020
 base.0=/home/thea/Coding/Projects/erobot_app/build/app/intermediates/transforms/r8/release/0/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
